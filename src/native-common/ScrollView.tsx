@@ -29,7 +29,7 @@ export class ScrollView extends ViewBase<RX.Types.ScrollViewProps, RX.Types.Stat
         if (this.props.scrollXAnimatedValue || this.props.scrollYAnimatedValue) {
             // Have to jump over to an Animated ScrollView to use an RN.Animated.event...
             return (
-                <RN.Animated.ScrollView { ...nativeProps }>
+                <RN.Animated.ScrollView { ...nativeProps as typeof RN.ScrollViewBase }>
                     { nativeProps.children }
                 </RN.Animated.ScrollView>
             );

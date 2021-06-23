@@ -106,8 +106,8 @@ module ReactXP {
 
     const macAnimatedClasses =  {
         ...CommonAnimatedClasses,
-        TextInput: RN.Animated.createAnimatedComponent(TextInputImpl),
-        View: RN.Animated.createAnimatedComponent(ViewImpl),
+        TextInput: RN.Animated.createAnimatedComponent(TextInputImpl) as unknown as typeof RN.ReactNativeBaseComponent,
+        View: RN.Animated.createAnimatedComponent(ViewImpl) as unknown as typeof RN.ReactNativeBaseComponent,
     };
 
     export const Animated = makeAnimated(macAnimatedClasses);

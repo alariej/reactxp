@@ -106,7 +106,7 @@ module ReactXP {
 
     const androidAnimatedClasses =  {
         ...CommonAnimatedClasses,
-        Text: RN.Animated.createAnimatedComponent(TextImpl),
+        Text: RN.Animated.createAnimatedComponent(TextImpl) as unknown as typeof RN.ReactNativeBaseComponent,
     };
 
     export const Animated = makeAnimated(androidAnimatedClasses);

@@ -106,9 +106,9 @@ module ReactXP {
 
     const windowsAnimatedClasses =  {
         ...CommonAnimatedClasses,
-        View: RN.Animated.createAnimatedComponent(ViewImpl),
-        TextInput:  RN.Animated.createAnimatedComponent(TextInputImpl),
-        Text:  RN.Animated.createAnimatedComponent(TextImpl),
+        View: RN.Animated.createAnimatedComponent(ViewImpl) as unknown as typeof RN.ReactNativeBaseComponent,
+        TextInput:  RN.Animated.createAnimatedComponent(TextInputImpl) as unknown as typeof RN.ReactNativeBaseComponent,
+        Text:  RN.Animated.createAnimatedComponent(TextImpl) as unknown as typeof RN.ReactNativeBaseComponent,
     };
 
     export const Animated = makeAnimated(windowsAnimatedClasses, true);

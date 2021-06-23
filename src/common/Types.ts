@@ -1071,7 +1071,7 @@ export enum LocationErrorType {
 }
 
 export type LocationWatchId = number;
-export type LocationSuccessCallback = (position: Position) => void;
+export type LocationSuccessCallback = (position: GeolocationPosition) => void;
 export type LocationFailureCallback = (error: LocationErrorType) => void;
 
 //

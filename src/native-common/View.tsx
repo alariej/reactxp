@@ -265,12 +265,12 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
         const isButton = this._isButton(props);
         if (isButton && !this._mixinIsApplied) {
             // Create local handlers
-            this.touchableHandlePress = this.touchableHandlePress.bind(this);
-            this.touchableHandleLongPress = this.touchableHandleLongPress.bind(this);
-            this.touchableGetPressRectOffset = this.touchableGetPressRectOffset.bind(this);
-            this.touchableHandleActivePressIn = this.touchableHandleActivePressIn.bind(this);
-            this.touchableHandleActivePressOut = this.touchableHandleActivePressOut.bind(this);
-            this.touchableGetHighlightDelayMS = this.touchableGetHighlightDelayMS.bind(this);
+            this.touchableHandlePress = this.touchableHandlePress!.bind(this);
+            this.touchableHandleLongPress = this.touchableHandleLongPress!.bind(this);
+            this.touchableGetPressRectOffset = this.touchableGetPressRectOffset!.bind(this);
+            this.touchableHandleActivePressIn = this.touchableHandleActivePressIn!.bind(this);
+            this.touchableHandleActivePressOut = this.touchableHandleActivePressOut!.bind(this);
+            this.touchableGetHighlightDelayMS = this.touchableGetHighlightDelayMS!.bind(this);
 
             applyMixin(this, RN.Touchable.Mixin, [
                 // Properties that View and RN.Touchable.Mixin have in common. View needs
@@ -501,7 +501,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
         );
     }
 
-    touchableHandlePress(e: RX.Types.SyntheticEvent): void {
+    touchableHandlePress?(e: RX.Types.SyntheticEvent): void {
         UserInterface.evaluateTouchLatency(e);
         if (EventHelpers.isRightMouseButton(e)) {
             if (this.props.onContextMenu) {
@@ -514,7 +514,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
         }
     }
 
-    touchableHandleLongPress(e: RX.Types.SyntheticEvent): void {
+    touchableHandleLongPress?(e: RX.Types.SyntheticEvent): void {
         if (!EventHelpers.isRightMouseButton(e)) {
             if (this.props.onLongPress) {
                 this.props.onLongPress(EventHelpers.toMouseEvent(e));
@@ -522,7 +522,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
         }
     }
 
-    touchableHandleActivePressIn(e: RX.Types.SyntheticEvent): void {
+    touchableHandleActivePressIn?(e: RX.Types.SyntheticEvent): void {
         if (this._isTouchFeedbackApplicable()) {
             if (this.props.underlayColor) {
                 if (this._hideTimeout) {
@@ -539,7 +539,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
         }
     }
 
-    touchableHandleActivePressOut(e: RX.Types.SyntheticEvent): void {
+    touchableHandleActivePressOut?(e: RX.Types.SyntheticEvent): void {
         if (this._isTouchFeedbackApplicable()) {
             if (this.props.underlayColor) {
                 if (this._hideTimeout) {
@@ -554,11 +554,11 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
         }
     }
 
-    touchableGetHighlightDelayMS(): number {
+    touchableGetHighlightDelayMS?(): number {
         return 20;
     }
 
-    touchableGetPressRectOffset() {
+    touchableGetPressRectOffset?() {
         return {top: 20, left: 20, right: 20, bottom: 100};
     }
 

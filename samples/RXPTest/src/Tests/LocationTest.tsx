@@ -219,7 +219,7 @@ class LocationView extends RX.Component<RX.CommonProps, LocationState> {
         });
     }
 
-    private _formatPosition(pos: Position) {
+    private _formatPosition(pos: GeolocationPosition) {
         return 'Lat: ' + pos.coords.latitude +
             ', Long: ' + pos.coords.longitude +
             ', Alt: ' + pos.coords.altitude +

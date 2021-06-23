@@ -26,10 +26,10 @@ export interface AnimatedClasses {
 }
 
 export const CommonAnimatedClasses: AnimatedClasses = {
-    Image: RN.Animated.createAnimatedComponent(RXImage) as typeof RN.ReactNativeBaseComponent,
-    Text: RN.Animated.createAnimatedComponent(RXText) as typeof RN.ReactNativeBaseComponent,
-    TextInput: RN.Animated.createAnimatedComponent(RXTextInput) as typeof RN.ReactNativeBaseComponent,
-    View: RN.Animated.createAnimatedComponent(RXView)  as typeof RN.ReactNativeBaseComponent,
+    Image: RN.Animated.createAnimatedComponent(RXImage) as unknown as typeof RN.ReactNativeBaseComponent,
+    Text: RN.Animated.createAnimatedComponent(RXText) as unknown as typeof RN.ReactNativeBaseComponent,
+    TextInput: RN.Animated.createAnimatedComponent(RXTextInput) as unknown as typeof RN.ReactNativeBaseComponent,
+    View: RN.Animated.createAnimatedComponent(RXView) as unknown  as typeof RN.ReactNativeBaseComponent,
 };
 
 let animatedClasses: AnimatedClasses = CommonAnimatedClasses;
@@ -163,7 +163,7 @@ const timing = function(
                     duration: config.duration,
                     delay: config.delay,
                     isInteraction: config.isInteraction,
-                    useNativeDriver: config.useNativeDriver,
+                    useNativeDriver: config.useNativeDriver || true,
                 };
 
                 RN.Animated.timing(value as RN.Animated.Value, timingConfig).start(result => {
