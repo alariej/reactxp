@@ -17,6 +17,7 @@
     "subscribableevent": "^1.0.1"
   },
   "peerDependencies": {
+    "@react-native-async-storage/async-storage": "1.15.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "0.63.4",
