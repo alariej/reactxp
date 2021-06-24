@@ -16,9 +16,12 @@
     ],
 
     "camelcase": "off",
-    "@typescript-eslint/camelcase": [
-      "error",
-      {
+    "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          "selector": "default",
+          "format": ["camelCase"]
+        },      {
         "allow": [
           "^reactxp_",
           "^mixin_",
