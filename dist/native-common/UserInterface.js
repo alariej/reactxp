@@ -124,10 +124,10 @@ var UserInterface = /** @class */ (function (_super) {
         // Nothing to do
     };
     UserInterface.prototype.dismissKeyboard = function () {
-        // Work around the fact that the react-native type definition file
-        // doesn't properly specify RN.TextInput.State as static.
-        var staticState = RN.TextInput.State;
-        staticState.blurTextInput(staticState.currentlyFocusedField());
+        var _a;
+        // @ts-ignore
+        var focusedInput = RN.TextInput.State.currentlyFocusedInput();
+        (_a = focusedInput === null || focusedInput === void 0 ? void 0 : focusedInput.getNativeRef()) === null || _a === void 0 ? void 0 : _a.blur();
     };
     UserInterface.prototype.isHighPixelDensityScreen = function () {
         var ratio = RN.PixelRatio.get();
