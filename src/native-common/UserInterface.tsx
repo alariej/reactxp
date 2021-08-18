@@ -117,10 +117,10 @@ export class UserInterface extends RX.UserInterface {
     }
 
     dismissKeyboard() {
-        // Work around the fact that the react-native type definition file
-        // doesn't properly specify RN.TextInput.State as static.
-        const staticState = (RN.TextInput as any).State as RN.TextInputState;
-        staticState.blurTextInput(staticState.currentlyFocusedField());
+
+        // @ts-ignore
+        const focusedInput = RN.TextInput.State.currentlyFocusedInput();
+        focusedInput?.getNativeRef()?.blur();
     }
 
     isHighPixelDensityScreen() {
