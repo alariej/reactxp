@@ -85,7 +85,7 @@ export class AccessibilityUtil extends CommonAccessibilityUtil {
     // We use the override traits if they are present, else use the default trait.
     // If ensureDefaultTrait is true, ensure the return result contains the defaultTrait.
     accessibilityTraitToString(overrideTraits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined,
-            defaultTrait?: Types.AccessibilityTrait, ensureDefaultTrait?: boolean): RN.AccessibilityTrait[] | undefined {
+            defaultTrait?: Types.AccessibilityTrait, ensureDefaultTrait?: boolean): RN.AccessibilityRole[] | undefined {
         // Check if there are valid override traits. Use them or else fallback to default traits.
         if (!overrideTraits && !defaultTrait) {
             return undefined;
@@ -101,7 +101,7 @@ export class AccessibilityUtil extends CommonAccessibilityUtil {
         } else {
             traits = Array.isArray(overrideTraits) ? overrideTraits : [overrideTraits || defaultTrait];
         }
-        return _.compact(_.map(traits, t  => t ? traitsMap[t] : undefined)) as RN.AccessibilityTrait[];
+        return _.compact(_.map(traits, t  => t ? traitsMap[t] : undefined)) as RN.AccessibilityRole[];
     }
 
     // Converts an AccessibilityTrait to an accessibilityComponentType string, but the returned value is only needed for Android. Other
