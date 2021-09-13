@@ -40,32 +40,6 @@ const _underlayInactive = 'transparent';
 
 const safeInsetsStyle = Styles.createViewStyle({ flex: 1, alignSelf: 'stretch' });
 
-function noop() { /* noop */ }
-
-function applyMixin(thisObj: any, mixin: {[propertyName: string]: any}, propertiesToSkip: string[]) {
-    Object.getOwnPropertyNames(mixin).forEach(name => {
-        if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1 && typeof mixin[name].bind === 'function') {
-            assert(
-                !(name in thisObj),
-                `An object cannot have a method with the same name as one of its mixins: "${name}"`,
-            );
-            thisObj[name] = mixin[name].bind(thisObj);
-        }
-    });
-}
-
-function removeMixin(thisObj: any, mixin: {[propertyName: string]: any}, propertiesToSkip: string[]) {
-    Object.getOwnPropertyNames(mixin).forEach(name => {
-        if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1) {
-            assert(
-                (name in thisObj),
-                `An object is missing a mixin method: "${name}"`,
-            );
-            delete thisObj[name];
-        }
-    });
-}
-
 type ChildKey = string | number;
 function extractChildrenKeys(children: React.ReactNode): ChildKey[] {
     const keys: ChildKey[] = [];
@@ -142,32 +116,17 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
 
     protected _internalProps: any = {};
 
-    // Assigned when mixin is applied
-    touchableGetInitialState!: () => RN.Touchable.State;
-    touchableHandleStartShouldSetResponder!: () => boolean;
-    touchableHandleResponderTerminationRequest!: () => boolean;
-    touchableHandleResponderGrant!: (e: React.SyntheticEvent<any>) => void;
-    touchableHandleResponderMove!: (e: React.SyntheticEvent<any>) => void;
-    touchableHandleResponderRelease!: (e: React.SyntheticEvent<any>) => void;
-    touchableHandleResponderTerminate!: (e: React.SyntheticEvent<any>) => void;
-
-    private _mixinIsApplied = false;
     private _childrenKeys: ChildKey[] | undefined;
-
-    private _mixin_componentDidMount?: () => void;
-    private _mixin_componentWillUnmount?: () => void;
 
     protected _isMounted = false;
     private _hideTimeout: number | undefined;
     private _defaultOpacityValue: number | undefined;
     private _opacityAnimatedValue: RN.Animated.Value | undefined;
-    private _opacityAnimatedStyle: RX.Types.AnimatedViewStyleRuleSet | undefined;
 
     private _focusArbitratorProvider: FocusArbitratorProvider | undefined;
 
     constructor(props: RX.Types.ViewProps, context?: ViewContext) {
         super(props, context);
-        this._updateMixin(props, true);
         this._buildInternalProps(props);
 
         if (props.arbitrateFocus) {
@@ -176,7 +135,6 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
     }
 
     UNSAFE_componentWillReceiveProps(nextProps: RX.Types.ViewProps) {
-        this._updateMixin(nextProps, false);
         this._buildInternalProps(nextProps);
 
         if (('arbitrateFocus' in nextProps) && (this.props.arbitrateFocus !== nextProps.arbitrateFocus)) {
@@ -245,9 +203,6 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
 
     componentDidMount() {
         this._isMounted = true;
-        if (this._mixin_componentDidMount) {
-            this._mixin_componentDidMount();
-        }
 
         if (this.props.autoFocus) {
             this.requestFocus();
@@ -256,58 +211,8 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
 
     componentWillUnmount() {
         this._isMounted = false;
-        if (this._mixin_componentWillUnmount) {
-            this._mixin_componentWillUnmount();
-        }
     }
 
-    private _updateMixin(props: RX.Types.ViewProps, initial: boolean) {
-        const isButton = this._isButton(props);
-        if (isButton && !this._mixinIsApplied) {
-            // Create local handlers
-            this.touchableHandlePress = this.touchableHandlePress!.bind(this);
-            this.touchableHandleLongPress = this.touchableHandleLongPress!.bind(this);
-            this.touchableGetPressRectOffset = this.touchableGetPressRectOffset!.bind(this);
-            this.touchableHandleActivePressIn = this.touchableHandleActivePressIn!.bind(this);
-            this.touchableHandleActivePressOut = this.touchableHandleActivePressOut!.bind(this);
-            this.touchableGetHighlightDelayMS = this.touchableGetHighlightDelayMS!.bind(this);
-
-            applyMixin(this, RN.Touchable.Mixin, [
-                // Properties that View and RN.Touchable.Mixin have in common. View needs
-                // to dispatch these methods to RN.Touchable.Mixin manually.
-                'componentDidMount',
-                'componentWillUnmount',
-            ]);
-
-            this._mixin_componentDidMount = RN.Touchable.Mixin.componentDidMount || noop;
-            this._mixin_componentWillUnmount = RN.Touchable.Mixin.componentWillUnmount || noop;
-
-            if (initial) {
-                this.state = this.touchableGetInitialState();
-            } else {
-                this.setState(this.touchableGetInitialState());
-            }
-
-            this._mixinIsApplied = true;
-        } else if (!isButton && this._mixinIsApplied) {
-            removeMixin(this, RN.Touchable.Mixin, [
-                'componentDidMount',
-                'componentWillUnmount',
-            ]);
-
-            delete this._mixin_componentDidMount;
-            delete this._mixin_componentWillUnmount;
-
-            delete this.touchableHandlePress;
-            delete this.touchableHandleLongPress;
-            delete this.touchableGetPressRectOffset;
-            delete this.touchableHandleActivePressIn;
-            delete this.touchableHandleActivePressOut;
-            delete this.touchableGetHighlightDelayMS;
-
-            this._mixinIsApplied = false;
-        }
-    }
 
     getChildContext() {
         const childContext: ViewContext = {};
@@ -375,31 +280,6 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
 
         const baseStyle = this._getStyles(props);
         this._internalProps.style = baseStyle;
-        if (this._mixinIsApplied) {
-            const responderProps = {
-                onStartShouldSetResponder: this.props.onStartShouldSetResponder || this.touchableHandleStartShouldSetResponder,
-                onResponderTerminationRequest: this.props.onResponderTerminationRequest || this.touchableHandleResponderTerminationRequest,
-                onResponderGrant: this.props.onResponderGrant || this.touchableHandleResponderGrant,
-                onResponderMove: this.props.onResponderMove || this.touchableHandleResponderMove,
-                onResponderRelease: this.props.onResponderRelease || this.touchableHandleResponderRelease,
-                onResponderTerminate: this.props.onResponderTerminate || this.touchableHandleResponderTerminate,
-            };
-            this._internalProps = extend(this._internalProps, responderProps);
-
-            if (!this.props.disableTouchOpacityAnimation) {
-                const opacityValueFromProps = this._getDefaultOpacityValue(props);
-                if (this._defaultOpacityValue !== opacityValueFromProps) {
-                    this._defaultOpacityValue = opacityValueFromProps;
-                    this._opacityAnimatedValue = new Animated.Value(this._defaultOpacityValue);
-                    this._opacityAnimatedStyle = Styles.createAnimatedViewStyle({
-                        opacity: this._opacityAnimatedValue,
-                    });
-                }
-                this._internalProps.style = Styles.combine([baseStyle as any, this._opacityAnimatedStyle]);
-            }
-
-            this._internalProps.tooltip = this.props.title;
-        }
 
         if (this.props.useSafeInsets) {
             this._internalProps.style = Styles.combine([this._internalProps.style, safeInsetsStyle]);
@@ -413,7 +293,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
     };
 
     private _isTouchFeedbackApplicable() {
-        return this._isMounted && this._mixinIsApplied && !!this._nativeComponent;
+        return this._isMounted && !!this._nativeComponent;
     }
 
     private _opacityActive(duration: number) {
@@ -422,15 +302,6 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
 
     private _opacityInactive(duration: number) {
         this._setOpacityTo(this._defaultOpacityValue!, duration);
-    }
-
-    private _getDefaultOpacityValue(props: RX.Types.ViewProps): number {
-        let flattenedStyles: { [key: string]: any } | undefined;
-        if (props && props.style) {
-            flattenedStyles = RN.StyleSheet.flatten(props.style as RN.StyleProp<RN.ViewStyle>);
-        }
-
-        return flattenedStyles && flattenedStyles.opacity || 1;
     }
 
     private _setOpacityTo(value: number, duration: number) {

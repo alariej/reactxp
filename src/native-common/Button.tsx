@@ -13,7 +13,6 @@ import * as RN from 'react-native';
 
 import App from '../native-common/App';
 import AppConfig from '../common/AppConfig';
-import assert from '../common/assert';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import { Button as ButtonBase, Types } from '../common/Interfaces';
 import Timers from '../common/utils/Timers';
@@ -41,7 +40,6 @@ const _styles = {
 
 const _isNativeMacOs = Platform.getType() === 'macos';
 
-const _defaultAccessibilityTrait = Types.AccessibilityTrait.Button;
 const _defaultImportantForAccessibility = Types.ImportantForAccessibility.Yes;
 
 const _defaultActiveOpacity = 0.2;
@@ -49,20 +47,6 @@ const _inactiveOpacityAnimationDuration = 250;
 const _activeOpacityAnimationDuration = 0;
 const _hideUnderlayTimeout = 100;
 const _underlayInactive = 'transparent';
-
-function noop() { /* noop */ }
-
-function applyMixin(thisObj: any, mixin: {[propertyName: string]: any}, propertiesToSkip: string[]) {
-    Object.getOwnPropertyNames(mixin).forEach(name => {
-        if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1 && typeof mixin[name].bind === 'function') {
-            assert(
-                !(name in thisObj),
-                `An object cannot have a method with the same name as one of its mixins: "${name}"`,
-            );
-            thisObj[name] = mixin[name].bind(thisObj);
-        }
-    });
-}
 
 export interface ButtonContext {
     hasRxButtonAscendant?: boolean;
@@ -81,18 +65,6 @@ export class Button extends ButtonBase {
         hasRxButtonAscendant: PropTypes.bool,
     };
 
-    private _mixin_componentDidMount = RN.Touchable.Mixin.componentDidMount || noop;
-    private _mixin_componentWillUnmount = RN.Touchable.Mixin.componentWillUnmount || noop;
-
-    // These are provided by mixin applied in the constructor
-    touchableGetInitialState!: () => RN.Touchable.State;
-    touchableHandleStartShouldSetResponder!: () => boolean;
-    touchableHandleResponderTerminationRequest!: () => boolean;
-    touchableHandleResponderGrant!: (e: RN.GestureResponderEvent) => void;
-    touchableHandleResponderMove!: (e: RN.GestureResponderEvent) => void;
-    touchableHandleResponderRelease!: (e: RN.GestureResponderEvent) => void;
-    touchableHandleResponderTerminate!: (e: RN.GestureResponderEvent) => void;
-
     protected _isMounted = false;
     protected _isMouseOver = false;
     protected _isHoverStarted = false;
@@ -105,13 +77,6 @@ export class Button extends ButtonBase {
 
     constructor(props: Types.ButtonProps, context?: ButtonContext) {
         super(props, context);
-        applyMixin(this, RN.Touchable.Mixin, [
-            // Properties that Button and RN.Touchable.Mixin have in common. Button needs
-            // to dispatch these methods to RN.Touchable.Mixin manually.
-            'componentDidMount',
-            'componentWillUnmount',
-        ]);
-        this.state = this.touchableGetInitialState();
         this._setOpacityStyles(props);
 
         if (context && context.hasRxButtonAscendant) {
@@ -133,10 +98,6 @@ export class Button extends ButtonBase {
         // Accessibility props.
         const importantForAccessibility = AccessibilityUtil.importantForAccessibilityToString(this.props.importantForAccessibility,
             _defaultImportantForAccessibility);
-        const accessibilityTrait = AccessibilityUtil.accessibilityTraitToString(this.props.accessibilityTraits,
-            _defaultAccessibilityTrait, true);
-        const accessibilityComponentType = AccessibilityUtil.accessibilityComponentTypeToString(this.props.accessibilityTraits,
-            _defaultAccessibilityTrait);
 
         const opacityStyle = this.props.disableTouchOpacityAnimation ? undefined : this._opacityAnimatedStyle;
         let disabledStyle = this.props.disabled ? _styles.disabled : undefined;
@@ -155,15 +116,7 @@ export class Button extends ButtonBase {
             style: Styles.combine([_styles.defaultButton as any, this.props.style, opacityStyle,
                 disabledStyle]) as RN.StyleProp<RN.ViewStyle>,
             accessibilityLabel: this.props.accessibilityLabel || this.props.title,
-            accessibilityTraits: accessibilityTrait,
-            accessibilityComponentType: accessibilityComponentType,
             importantForAccessibility: importantForAccessibility,
-            onStartShouldSetResponder: this.touchableHandleStartShouldSetResponder,
-            onResponderTerminationRequest: this.touchableHandleResponderTerminationRequest,
-            onResponderGrant: this.touchableHandleResponderGrant,
-            onResponderMove: this.touchableHandleResponderMove,
-            onResponderRelease: this.touchableHandleResponderRelease,
-            onResponderTerminate: this.touchableHandleResponderTerminate,
             shouldRasterizeIOS: this.props.shouldRasterizeIOS,
             testID: this.props.testId,
         };
@@ -184,7 +137,6 @@ export class Button extends ButtonBase {
     }
 
     componentDidMount() {
-        this._mixin_componentDidMount();
         this._isMounted = true;
 
         if (this.props.autoFocus) {
@@ -193,7 +145,6 @@ export class Button extends ButtonBase {
     }
 
     componentWillUnmount() {
-        this._mixin_componentWillUnmount();
         this._isMounted = false;
     }
 

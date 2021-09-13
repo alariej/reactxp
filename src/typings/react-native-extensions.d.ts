@@ -73,24 +73,6 @@ declare module 'react-native' {
         interface State {
             touchable: any;
         }
-
-        interface TouchableMixin extends React.Mixin<any, any> {
-            touchableGetInitialState: () => State;
-            touchableHandleStartShouldSetResponder: () => {};
-            touchableHandleResponderTerminationRequest: () => {};
-            touchableHandleResponderGrant: (e: React.SyntheticEvent<any>, dispatchID: string) => {};
-            touchableHandleResponderMove: (e: React.SyntheticEvent<any>) => {};
-            touchableHandleResponderRelease: (e: React.SyntheticEvent<any>) => {};
-            touchableHandleResponderTerminate: (e: React.SyntheticEvent<any>) => {};
-            touchableHandleActivePressIn?: (e: React.SyntheticEvent<any>) => {};
-            touchableHandleActivePressOut?: (e: React.SyntheticEvent<any>) => {};
-            touchableHandlePress?: (e: React.SyntheticEvent<any>) => {};
-            touchableHandleLongPress?: (e: React.SyntheticEvent<any>) => {};
-            touchableGetHighlightDelayMS?: () => number;
-            touchableGetPressRectOffset?: () => RectOffset;
-        }
-
-        let Mixin: TouchableMixin;
     }
 
     interface ExtendedAccessibilityInfoStatic extends RN.AccessibilityInfoStatic {
