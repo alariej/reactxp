@@ -233,8 +233,15 @@ export class FrontLayerViewManager {
                     activePopupContext.anchorHandle,
                     (x: number, y: number, width: number, height: number) => {
                         const touchEvent = e.nativeEvent;
-                        const anchorRect: ClientRect = { left: x, top: y, right: x + width,
-                            bottom: y + height, width: width, height: height };
+                        const anchorRect: ClientRect = {
+                            left: x, top: y, right: x + width,
+                            bottom: y + height, width: width, height: height,
+                            x: 0,
+                            y: 0,
+                            toJSON: function () {
+                                throw new Error('Function not implemented.');
+                            }
+                        };
 
                         // Find out if the press event was on the anchor so we can notify the caller about it.
                         if (!_.isUndefined(touchEvent.pageX) && !_.isUndefined(touchEvent.pageY) &&
