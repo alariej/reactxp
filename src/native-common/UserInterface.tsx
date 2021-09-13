@@ -117,10 +117,7 @@ export class UserInterface extends RX.UserInterface {
     }
 
     dismissKeyboard() {
-
-        // @ts-ignore
-        const focusedInput = RN.TextInput.State.currentlyFocusedInput();
-        focusedInput?.getNativeRef()?.blur();
+        RN.Keyboard.dismiss();
     }
 
     isHighPixelDensityScreen() {
