@@ -157,7 +157,13 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
 
                 const anchorRect: ClientRect = {
                     left: x, top: y, right: x + width, bottom: y + height,
-                    width: width, height: height};
+                    width: width, height: height,
+                    x: 0,
+                    y: 0,
+                    toJSON: function () {
+                        throw new Error('Function not implemented.');
+                    }
+                };
 
                 RN.NativeModules.UIManager.measureInWindow(
                     this._viewHandle,
@@ -165,6 +171,11 @@ export class PopupContainerView extends PopupContainerViewBase<PopupContainerVie
                         const popupRect: ClientRect = {
                             left: x, top: y, right: x + width, bottom: y + height,
                             width: width, height: height,
+                            x: 0,
+                            y: 0,
+                            toJSON: function () {
+                                throw new Error('Function not implemented.');
+                            }
                         };
 
                         this._recalcPositionFromLayoutData(anchorRect, popupRect);
