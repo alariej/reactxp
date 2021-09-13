@@ -19,29 +19,17 @@ export declare class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateles
     context: ViewContext;
     static childContextTypes: React.ValidationMap<any>;
     protected _internalProps: any;
-    touchableGetInitialState: () => RN.Touchable.State;
-    touchableHandleStartShouldSetResponder: () => boolean;
-    touchableHandleResponderTerminationRequest: () => boolean;
-    touchableHandleResponderGrant: (e: React.SyntheticEvent<any>) => void;
-    touchableHandleResponderMove: (e: React.SyntheticEvent<any>) => void;
-    touchableHandleResponderRelease: (e: React.SyntheticEvent<any>) => void;
-    touchableHandleResponderTerminate: (e: React.SyntheticEvent<any>) => void;
-    private _mixinIsApplied;
     private _childrenKeys;
-    private _mixin_componentDidMount?;
-    private _mixin_componentWillUnmount?;
     protected _isMounted: boolean;
     private _hideTimeout;
     private _defaultOpacityValue;
     private _opacityAnimatedValue;
-    private _opacityAnimatedStyle;
     private _focusArbitratorProvider;
     constructor(props: RX.Types.ViewProps, context?: ViewContext);
     UNSAFE_componentWillReceiveProps(nextProps: RX.Types.ViewProps): void;
     UNSAFE_componentWillUpdate(nextProps: RX.Types.ViewProps, nextState: {}): void;
     componentDidMount(): void;
     componentWillUnmount(): void;
-    private _updateMixin;
     getChildContext(): ViewContext;
     /**
      * Attention:
@@ -53,7 +41,6 @@ export declare class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateles
     private _isTouchFeedbackApplicable;
     private _opacityActive;
     private _opacityInactive;
-    private _getDefaultOpacityValue;
     private _setOpacityTo;
     private _showUnderlay;
     private _hideUnderlay;

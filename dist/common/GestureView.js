@@ -451,7 +451,7 @@ var GestureView = /** @class */ (function (_super) {
     };
     GestureView.prototype._sendPanEvent = function (e, gestureState, gestureType, initializeFromEvent, isComplete) {
         var state = this._pendingGestureState;
-        assert_1.default(this._lastGestureStartEvent, 'Gesture start event must not be null.');
+        (0, assert_1.default)(this._lastGestureStartEvent, 'Gesture start event must not be null.');
         var initialPageX = this._lastGestureStartEvent
             ? this._lastGestureStartEvent.pageX
             : initializeFromEvent ? e.pageX : state.initialPageX;

@@ -258,7 +258,7 @@ var TextInput = /** @class */ (function (_super) {
                 TextInputPlaceholderSupport.removeRef(this.props.placeholderTextColor);
             }
         }
-        if (!lodashMini_1.isEmpty(nextState)) {
+        if (!(0, lodashMini_1.isEmpty)(nextState)) {
             this.setState(nextState, function () {
                 // Resize as needed after state is set
                 if (_this._mountedComponent instanceof HTMLTextAreaElement) {
@@ -451,5 +451,5 @@ var TextInput = /** @class */ (function (_super) {
     return TextInput;
 }(React.Component));
 exports.TextInput = TextInput;
-FocusManager_1.applyFocusableComponentMixin(TextInput);
+(0, FocusManager_1.applyFocusableComponentMixin)(TextInput);
 exports.default = TextInput;

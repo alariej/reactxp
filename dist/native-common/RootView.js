@@ -164,7 +164,7 @@ var RootViewUsingStore = /** @class */ (function (_super) {
     };
     RootViewUsingStore.prototype._getStateFromStore = function () {
         var mainView = MainViewStore_1.default.getMainView();
-        if (mainView && !lodashMini_1.isEqual(mainView.props, this._mainViewProps)) {
+        if (mainView && !(0, lodashMini_1.isEqual)(mainView.props, this._mainViewProps)) {
             mainView = React.cloneElement(mainView, this._mainViewProps);
         }
         return {

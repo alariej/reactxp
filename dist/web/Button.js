@@ -285,5 +285,5 @@ var Button = /** @class */ (function (_super) {
     return Button;
 }(Interfaces_1.Button));
 exports.Button = Button;
-FocusManager_1.applyFocusableComponentMixin(Button);
+(0, FocusManager_1.applyFocusableComponentMixin)(Button);
 exports.default = Button;

@@ -59,29 +59,12 @@ var _activeOpacityAnimationDuration = 0;
 var _hideUnderlayTimeout = 100;
 var _underlayInactive = 'transparent';
 var safeInsetsStyle = Styles_1.default.createViewStyle({ flex: 1, alignSelf: 'stretch' });
-function noop() { }
-function applyMixin(thisObj, mixin, propertiesToSkip) {
-    Object.getOwnPropertyNames(mixin).forEach(function (name) {
-        if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1 && typeof mixin[name].bind === 'function') {
-            assert_1.default(!(name in thisObj), "An object cannot have a method with the same name as one of its mixins: \"" + name + "\"");
-            thisObj[name] = mixin[name].bind(thisObj);
-        }
-    });
-}
-function removeMixin(thisObj, mixin, propertiesToSkip) {
-    Object.getOwnPropertyNames(mixin).forEach(function (name) {
-        if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1) {
-            assert_1.default((name in thisObj), "An object is missing a mixin method: \"" + name + "\"");
-            delete thisObj[name];
-        }
-    });
-}
 function extractChildrenKeys(children) {
     var keys = [];
     React.Children.forEach(children, function (child, index) {
         if (child) {
             var childReactElement = child;
-            assert_1.default(childReactElement.key !== undefined && childReactElement.key !== null, 'Children passed to a `View` with child animations enabled must have a `key`');
+            (0, assert_1.default)(childReactElement.key !== undefined && childReactElement.key !== null, 'Children passed to a `View` with child animations enabled must have a `key`');
             if (childReactElement.key !== null) {
                 keys.push(childReactElement.key);
             }
@@ -131,7 +114,6 @@ var View = /** @class */ (function (_super) {
     function View(props, context) {
         var _this = _super.call(this, props, context) || this;
         _this._internalProps = {};
-        _this._mixinIsApplied = false;
         _this._isMounted = false;
         _this._onKeyPress = function (e) {
             if (_this.props.onKeyPress) {
@@ -148,7 +130,6 @@ var View = /** @class */ (function (_super) {
                     }, _this.props.style],
             });
         };
-        _this._updateMixin(props, true);
         _this._buildInternalProps(props);
         if (props.arbitrateFocus) {
             _this._updateFocusArbitratorProvider(props);
@@ -156,7 +137,6 @@ var View = /** @class */ (function (_super) {
         return _this;
     }
     View.prototype.UNSAFE_componentWillReceiveProps = function (nextProps) {
-        this._updateMixin(nextProps, false);
         this._buildInternalProps(nextProps);
         if (('arbitrateFocus' in nextProps) && (this.props.arbitrateFocus !== nextProps.arbitrateFocus)) {
             this._updateFocusArbitratorProvider(nextProps);
@@ -182,7 +162,7 @@ var View = /** @class */ (function (_super) {
         //
         // The web implementation doesn't support string refs. For consistency, do the same assert
         // in the native implementation.
-        assert_1.default(findInvalidRefs(nextProps.children).length === 0, 'Invalid ref(s): ' + JSON.stringify(findInvalidRefs(nextProps.children)) +
+        (0, assert_1.default)(findInvalidRefs(nextProps.children).length === 0, 'Invalid ref(s): ' + JSON.stringify(findInvalidRefs(nextProps.children)) +
             ' Only callback refs are supported when using child animations on a `View`');
         var prevChildrenKeys = this._childrenKeys || [];
         var nextChildrenKeys = extractChildrenKeys(nextProps.children);
@@ -213,60 +193,12 @@ var View = /** @class */ (function (_super) {
     };
     View.prototype.componentDidMount = function () {
         this._isMounted = true;
-        if (this._mixin_componentDidMount) {
-            this._mixin_componentDidMount();
-        }
         if (this.props.autoFocus) {
             this.requestFocus();
         }
     };
     View.prototype.componentWillUnmount = function () {
         this._isMounted = false;
-        if (this._mixin_componentWillUnmount) {
-            this._mixin_componentWillUnmount();
-        }
-    };
-    View.prototype._updateMixin = function (props, initial) {
-        var isButton = this._isButton(props);
-        if (isButton && !this._mixinIsApplied) {
-            // Create local handlers
-            this.touchableHandlePress = this.touchableHandlePress.bind(this);
-            this.touchableHandleLongPress = this.touchableHandleLongPress.bind(this);
-            this.touchableGetPressRectOffset = this.touchableGetPressRectOffset.bind(this);
-            this.touchableHandleActivePressIn = this.touchableHandleActivePressIn.bind(this);
-            this.touchableHandleActivePressOut = this.touchableHandleActivePressOut.bind(this);
-            this.touchableGetHighlightDelayMS = this.touchableGetHighlightDelayMS.bind(this);
-            applyMixin(this, RN.Touchable.Mixin, [
-                // Properties that View and RN.Touchable.Mixin have in common. View needs
-                // to dispatch these methods to RN.Touchable.Mixin manually.
-                'componentDidMount',
-                'componentWillUnmount',
-            ]);
-            this._mixin_componentDidMount = RN.Touchable.Mixin.componentDidMount || noop;
-            this._mixin_componentWillUnmount = RN.Touchable.Mixin.componentWillUnmount || noop;
-            if (initial) {
-                this.state = this.touchableGetInitialState();
-            }
-            else {
-                this.setState(this.touchableGetInitialState());
-            }
-            this._mixinIsApplied = true;
-        }
-        else if (!isButton && this._mixinIsApplied) {
-            removeMixin(this, RN.Touchable.Mixin, [
-                'componentDidMount',
-                'componentWillUnmount',
-            ]);
-            delete this._mixin_componentDidMount;
-            delete this._mixin_componentWillUnmount;
-            delete this.touchableHandlePress;
-            delete this.touchableHandleLongPress;
-            delete this.touchableGetPressRectOffset;
-            delete this.touchableHandleActivePressIn;
-            delete this.touchableHandleActivePressOut;
-            delete this.touchableGetHighlightDelayMS;
-            this._mixinIsApplied = false;
-        }
     };
     View.prototype.getChildContext = function () {
         var childContext = {};
@@ -281,7 +213,7 @@ var View = /** @class */ (function (_super) {
      * as on android that would lead to extra layers of Views.
      */
     View.prototype._buildInternalProps = function (props) {
-        this._internalProps = lodashMini_1.clone(props);
+        this._internalProps = (0, lodashMini_1.clone)(props);
         this._internalProps.ref = this._setNativeComponent;
         if (props.testId) {
             // Convert from testId to testID.
@@ -309,7 +241,7 @@ var View = /** @class */ (function (_super) {
                 macAccessibilityProps.onClick = props.onPress;
             }
         }
-        this._internalProps = lodashMini_1.extend(this._internalProps, accessibilityProps);
+        this._internalProps = (0, lodashMini_1.extend)(this._internalProps, accessibilityProps);
         if (props.onLayout) {
             this._internalProps.onLayout = this._onLayout;
         }
@@ -326,48 +258,18 @@ var View = /** @class */ (function (_super) {
         }
         var baseStyle = this._getStyles(props);
         this._internalProps.style = baseStyle;
-        if (this._mixinIsApplied) {
-            var responderProps = {
-                onStartShouldSetResponder: this.props.onStartShouldSetResponder || this.touchableHandleStartShouldSetResponder,
-                onResponderTerminationRequest: this.props.onResponderTerminationRequest || this.touchableHandleResponderTerminationRequest,
-                onResponderGrant: this.props.onResponderGrant || this.touchableHandleResponderGrant,
-                onResponderMove: this.props.onResponderMove || this.touchableHandleResponderMove,
-                onResponderRelease: this.props.onResponderRelease || this.touchableHandleResponderRelease,
-                onResponderTerminate: this.props.onResponderTerminate || this.touchableHandleResponderTerminate,
-            };
-            this._internalProps = lodashMini_1.extend(this._internalProps, responderProps);
-            if (!this.props.disableTouchOpacityAnimation) {
-                var opacityValueFromProps = this._getDefaultOpacityValue(props);
-                if (this._defaultOpacityValue !== opacityValueFromProps) {
-                    this._defaultOpacityValue = opacityValueFromProps;
-                    this._opacityAnimatedValue = new Animated_1.default.Value(this._defaultOpacityValue);
-                    this._opacityAnimatedStyle = Styles_1.default.createAnimatedViewStyle({
-                        opacity: this._opacityAnimatedValue,
-                    });
-                }
-                this._internalProps.style = Styles_1.default.combine([baseStyle, this._opacityAnimatedStyle]);
-            }
-            this._internalProps.tooltip = this.props.title;
-        }
         if (this.props.useSafeInsets) {
             this._internalProps.style = Styles_1.default.combine([this._internalProps.style, safeInsetsStyle]);
         }
     };
     View.prototype._isTouchFeedbackApplicable = function () {
-        return this._isMounted && this._mixinIsApplied && !!this._nativeComponent;
+        return this._isMounted && !!this._nativeComponent;
     };
     View.prototype._opacityActive = function (duration) {
         this._setOpacityTo(this.props.activeOpacity || _defaultActiveOpacity, duration);
     };
     View.prototype._opacityInactive = function (duration) {
         this._setOpacityTo(this._defaultOpacityValue, duration);
-    };
-    View.prototype._getDefaultOpacityValue = function (props) {
-        var flattenedStyles;
-        if (props && props.style) {
-            flattenedStyles = RN.StyleSheet.flatten(props.style);
-        }
-        return flattenedStyles && flattenedStyles.opacity || 1;
     };
     View.prototype._setOpacityTo = function (value, duration) {
         Animated_1.default.timing(this._opacityAnimatedValue, {

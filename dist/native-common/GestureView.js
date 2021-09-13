@@ -98,8 +98,6 @@ var GestureView = /** @class */ (function (_super) {
     }
     GestureView.prototype.render = function () {
         var importantForAccessibility = AccessibilityUtil_1.default.importantForAccessibilityToString(this.props.importantForAccessibility, _defaultImportantForAccessibility);
-        var accessibilityTrait = AccessibilityUtil_1.default.accessibilityTraitToString(this.props.accessibilityTraits);
-        var accessibilityComponentType = AccessibilityUtil_1.default.accessibilityComponentTypeToString(this.props.accessibilityTraits);
         var extendedProps = {
             onFocus: this.props.onFocus,
             onBlur: this.props.onBlur,
@@ -112,7 +110,7 @@ var GestureView = /** @class */ (function (_super) {
                 extendedProps.enableFocusRing = true;
             }
         }
-        return (React.createElement(RN.View, __assign({ ref: this._onRef, style: [ViewBase_1.default.getDefaultViewStyle(), this.props.style], importantForAccessibility: importantForAccessibility, accessibilityTraits: accessibilityTrait, accessibilityComponentType: accessibilityComponentType, accessibilityLabel: this.props.accessibilityLabel, testID: this.props.testId }, this._panResponder.panHandlers, extendedProps), this.props.children));
+        return (React.createElement(RN.View, __assign({ ref: this._onRef, style: [ViewBase_1.default.getDefaultViewStyle(), this.props.style], importantForAccessibility: importantForAccessibility, accessibilityLabel: this.props.accessibilityLabel, testID: this.props.testId }, this._panResponder.panHandlers, extendedProps), this.props.children));
     };
     GestureView.prototype.focus = function () {
         if (this._view && this._view.focus) {

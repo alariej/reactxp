@@ -17,7 +17,7 @@ declare type AccessibilityComponentTypeValue = 'none' | 'button' | 'radiobutton_
 export declare class AccessibilityUtil extends CommonAccessibilityUtil {
     private _instance;
     setAccessibilityPlatformUtil(instance: AccessibilityPlatformUtil): void;
-    accessibilityTraitToString(overrideTraits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined, defaultTrait?: Types.AccessibilityTrait, ensureDefaultTrait?: boolean): RN.AccessibilityTrait[] | undefined;
+    accessibilityTraitToString(overrideTraits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined, defaultTrait?: Types.AccessibilityTrait, ensureDefaultTrait?: boolean): RN.AccessibilityRole[] | undefined;
     accessibilityComponentTypeToString(overrideTraits: Types.AccessibilityTrait | Types.AccessibilityTrait[] | undefined, defaultTrait?: Types.AccessibilityTrait): AccessibilityComponentTypeValue | undefined;
     accessibilityLiveRegionToString(liveRegion: Types.AccessibilityLiveRegion | undefined): AccessibilityLiveRegionValue | undefined;
     setAccessibilityFocus(component: React.Component<any, any>): void;

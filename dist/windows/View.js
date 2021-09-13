@@ -342,7 +342,7 @@ var View = /** @class */ (function (_super) {
             var importantForAccessibility = this.getImportantForAccessibility();
             // We don't use 'string' ref type inside ReactXP
             var originalRef = this._internalProps.ref;
-            assert_1.default(!(typeof originalRef === 'string'), 'View: ReactXP must not use string refs internally');
+            (0, assert_1.default)(!(typeof originalRef === 'string'), 'View: ReactXP must not use string refs internally');
             var componentRef = originalRef;
             var focusableViewProps = __assign(__assign({}, this._internalProps), { ref: this._onFocusableRef, componentRef: componentRef, isTabStop: windowsTabFocusable, tabIndex: tabIndex, importantForAccessibility: importantForAccessibility, disableSystemFocusVisuals: false, handledKeyDownKeys: DOWN_KEYCODES, handledKeyUpKeys: UP_KEYCODES, onKeyDown: this._onFocusableKeyDown, onKeyUp: this._onFocusableKeyUp, onFocus: this._onFocus, onBlur: this._onBlur, onAccessibilityTap: this._internalProps.onPress, testID: this.props.testId });
             var PotentiallyAnimatedFocusableView = this._isButton(this.props) ? FocusableAnimatedView : FocusableView;
@@ -503,7 +503,7 @@ var View = /** @class */ (function (_super) {
 }(View_1.View));
 exports.View = View;
 // A value for tabIndex marks a View as being potentially keyboard/screen reader focusable
-FocusManager_1.applyFocusableComponentMixin(View, function (nextProps) {
+(0, FocusManager_1.applyFocusableComponentMixin)(View, function (nextProps) {
     var tabIndex = nextProps && ('tabIndex' in nextProps) ? nextProps.tabIndex : this.props.tabIndex;
     return tabIndex !== undefined;
 });

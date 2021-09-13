@@ -35,7 +35,7 @@ var Scrollbar = /** @class */ (function () {
         this._handleWheelCallback = this._handleWheel.bind(this);
         this._handleMouseDownCallback = this._handleMouseDown.bind(this);
         this._updateCallback = this.update.bind(this);
-        assert_1.default(container, 'Container must not be null');
+        (0, assert_1.default)(container, 'Container must not be null');
         this._container = container;
     }
     Scrollbar.getNativeScrollbarWidth = function () {

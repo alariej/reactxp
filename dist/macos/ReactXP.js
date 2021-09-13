@@ -83,7 +83,7 @@ var ReactXP;
     ReactXP.UserPresence = UserPresence_1.default;
     ReactXP.View = View_1.default;
     var macAnimatedClasses = __assign(__assign({}, Animated_1.CommonAnimatedClasses), { TextInput: RN.Animated.createAnimatedComponent(TextInput_1.default), View: RN.Animated.createAnimatedComponent(View_1.default) });
-    ReactXP.Animated = Animated_1.makeAnimated(macAnimatedClasses);
+    ReactXP.Animated = (0, Animated_1.makeAnimated)(macAnimatedClasses);
     ReactXP.Types = RXTypes;
     ReactXP.Component = React.Component;
     ReactXP.createElement = React.createElement;

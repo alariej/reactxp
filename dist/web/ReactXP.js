@@ -40,7 +40,7 @@ var UserInterface_1 = require("./UserInterface");
 var UserPresence_1 = require("./UserPresence");
 var View_1 = require("./View");
 var ViewBase_1 = require("./ViewBase");
-AutoFocusHelper_1.setSortAndFilterFunc(FocusManager_1.default.sortAndFilterAutoFocusCandidates);
+(0, AutoFocusHelper_1.setSortAndFilterFunc)(FocusManager_1.default.sortAndFilterAutoFocusCandidates);
 // -- STRANGE THINGS GOING ON HERE --
 //
 // 1) 'export type Foo = FooImpl; export var Foo = FooImpl;'

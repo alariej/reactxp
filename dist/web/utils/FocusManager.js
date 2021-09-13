@@ -329,7 +329,7 @@ var FocusManager = /** @class */ (function (_super) {
 }(FocusManager_1.FocusManager));
 exports.FocusManager = FocusManager;
 function applyFocusableComponentMixin(Component, isConditionallyFocusable) {
-    FocusManager_1.applyFocusableComponentMixin(Component, isConditionallyFocusable);
+    (0, FocusManager_1.applyFocusableComponentMixin)(Component, isConditionallyFocusable);
     var origFocus = Component.prototype.focus;
     if (origFocus) {
         Component.prototype.focus = function () {

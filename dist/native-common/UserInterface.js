@@ -61,7 +61,7 @@ var UserInterface = /** @class */ (function (_super) {
     UserInterface.prototype.measureLayoutRelativeToWindow = function (component) {
         var deferred = new PromiseDefer_1.Defer();
         var nodeHandle = RN.findNodeHandle(component);
-        assert_1.default(!!nodeHandle);
+        (0, assert_1.default)(!!nodeHandle);
         RN.NativeModules.UIManager.measureInWindow(nodeHandle, function (x, y, width, height) {
             deferred.resolve({
                 x: x,
@@ -124,10 +124,7 @@ var UserInterface = /** @class */ (function (_super) {
         // Nothing to do
     };
     UserInterface.prototype.dismissKeyboard = function () {
-        var _a;
-        // @ts-ignore
-        var focusedInput = RN.TextInput.State.currentlyFocusedInput();
-        (_a = focusedInput === null || focusedInput === void 0 ? void 0 : focusedInput.getNativeRef()) === null || _a === void 0 ? void 0 : _a.blur();
+        RN.Keyboard.dismiss();
     };
     UserInterface.prototype.isHighPixelDensityScreen = function () {
         var ratio = RN.PixelRatio.get();

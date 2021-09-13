@@ -40,7 +40,6 @@ var React = require("react");
 var RN = require("react-native");
 var App_1 = require("../native-common/App");
 var AppConfig_1 = require("../common/AppConfig");
-var assert_1 = require("../common/assert");
 var AutoFocusHelper_1 = require("../common/utils/AutoFocusHelper");
 var Interfaces_1 = require("../common/Interfaces");
 var Timers_1 = require("../common/utils/Timers");
@@ -62,28 +61,16 @@ var _styles = {
     }),
 };
 var _isNativeMacOs = Platform_1.default.getType() === 'macos';
-var _defaultAccessibilityTrait = Interfaces_1.Types.AccessibilityTrait.Button;
 var _defaultImportantForAccessibility = Interfaces_1.Types.ImportantForAccessibility.Yes;
 var _defaultActiveOpacity = 0.2;
 var _inactiveOpacityAnimationDuration = 250;
 var _activeOpacityAnimationDuration = 0;
 var _hideUnderlayTimeout = 100;
 var _underlayInactive = 'transparent';
-function noop() { }
-function applyMixin(thisObj, mixin, propertiesToSkip) {
-    Object.getOwnPropertyNames(mixin).forEach(function (name) {
-        if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1 && typeof mixin[name].bind === 'function') {
-            assert_1.default(!(name in thisObj), "An object cannot have a method with the same name as one of its mixins: \"" + name + "\"");
-            thisObj[name] = mixin[name].bind(thisObj);
-        }
-    });
-}
 var Button = /** @class */ (function (_super) {
     __extends(Button, _super);
     function Button(props, context) {
         var _this = _super.call(this, props, context) || this;
-        _this._mixin_componentDidMount = RN.Touchable.Mixin.componentDidMount || noop;
-        _this._mixin_componentWillUnmount = RN.Touchable.Mixin.componentWillUnmount || noop;
         _this._isMounted = false;
         _this._isMouseOver = false;
         _this._isHoverStarted = false;
@@ -180,13 +167,6 @@ var Button = /** @class */ (function (_super) {
                     }, _this.props.style],
             });
         };
-        applyMixin(_this, RN.Touchable.Mixin, [
-            // Properties that Button and RN.Touchable.Mixin have in common. Button needs
-            // to dispatch these methods to RN.Touchable.Mixin manually.
-            'componentDidMount',
-            'componentWillUnmount',
-        ]);
-        _this.state = _this.touchableGetInitialState();
         _this._setOpacityStyles(props);
         if (context && context.hasRxButtonAscendant) {
             if (AppConfig_1.default.isDevelopmentMode()) {
@@ -201,8 +181,6 @@ var Button = /** @class */ (function (_super) {
     Button.prototype.render = function () {
         // Accessibility props.
         var importantForAccessibility = AccessibilityUtil_1.default.importantForAccessibilityToString(this.props.importantForAccessibility, _defaultImportantForAccessibility);
-        var accessibilityTrait = AccessibilityUtil_1.default.accessibilityTraitToString(this.props.accessibilityTraits, _defaultAccessibilityTrait, true);
-        var accessibilityComponentType = AccessibilityUtil_1.default.accessibilityComponentTypeToString(this.props.accessibilityTraits, _defaultAccessibilityTrait);
         var opacityStyle = this.props.disableTouchOpacityAnimation ? undefined : this._opacityAnimatedStyle;
         var disabledStyle = this.props.disabled ? _styles.disabled : undefined;
         if (this.props.disabled && this.props.disabledOpacity !== undefined) {
@@ -218,15 +196,7 @@ var Button = /** @class */ (function (_super) {
             style: Styles_1.default.combine([_styles.defaultButton, this.props.style, opacityStyle,
                 disabledStyle]),
             accessibilityLabel: this.props.accessibilityLabel || this.props.title,
-            accessibilityTraits: accessibilityTrait,
-            accessibilityComponentType: accessibilityComponentType,
             importantForAccessibility: importantForAccessibility,
-            onStartShouldSetResponder: this.touchableHandleStartShouldSetResponder,
-            onResponderTerminationRequest: this.touchableHandleResponderTerminationRequest,
-            onResponderGrant: this.touchableHandleResponderGrant,
-            onResponderMove: this.touchableHandleResponderMove,
-            onResponderRelease: this.touchableHandleResponderRelease,
-            onResponderTerminate: this.touchableHandleResponderTerminate,
             shouldRasterizeIOS: this.props.shouldRasterizeIOS,
             testID: this.props.testId,
         };
@@ -244,14 +214,12 @@ var Button = /** @class */ (function (_super) {
         return this._render(extendedProps, this._onMount);
     };
     Button.prototype.componentDidMount = function () {
-        this._mixin_componentDidMount();
         this._isMounted = true;
         if (this.props.autoFocus) {
             this.requestFocus();
         }
     };
     Button.prototype.componentWillUnmount = function () {
-        this._mixin_componentWillUnmount();
         this._isMounted = false;
     };
     Button.prototype.UNSAFE_componentWillReceiveProps = function (nextProps) {

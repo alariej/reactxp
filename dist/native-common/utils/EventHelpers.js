@@ -200,7 +200,7 @@ var EventHelpers = /** @class */ (function () {
             // We need to add keyCode and other properties to the original event, but React Native
             // reuses events, so we're not allowed to modify the original.
             // Instead, we'll clone it.
-            keyEvent = lodashMini_1.clone(keyEvent);
+            keyEvent = (0, lodashMini_1.clone)(keyEvent);
             keyEvent.keyCode = keyCode;
             var nativeEvent = e.nativeEvent;
             if (nativeEvent.shiftKey) {
@@ -237,7 +237,7 @@ var EventHelpers = /** @class */ (function () {
         // We need to add various properties to the original event, but React Native
         // reuses events, so we're not allowed to modify the original.
         // Instead, we'll clone it.
-        var mouseEvent = lodashMini_1.clone(e);
+        var mouseEvent = (0, lodashMini_1.clone)(e);
         var nativeEvent = e.nativeEvent;
         // We keep pageX/Y and clientX/Y coordinates in sync, similar to the React web behavior
         // RN (UWP flavor for this type of event) also pass coordinates in the target view (locationX/Y) that we don't use here.

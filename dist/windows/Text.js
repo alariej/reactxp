@@ -96,7 +96,7 @@ var Text = /** @class */ (function (_super) {
 }(Text_1.Text));
 exports.Text = Text;
 // Text is focusable just by screen readers
-FocusManager_1.applyFocusableComponentMixin(Text, function (nextProps, nextState, nextCtx) {
+(0, FocusManager_1.applyFocusableComponentMixin)(Text, function (nextProps, nextState, nextCtx) {
     // This control should be tracked by a FocusManager if there's no other control tracked by the same FocusManager in
     // the parent path
     return nextCtx && ('isRxParentAFocusableInSameFocusManager' in nextCtx)

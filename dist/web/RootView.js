@@ -483,7 +483,7 @@ var RootView = /** @class */ (function (_super) {
         // Get the width/height of root view window.
         var windowDims = { width: window.innerWidth, height: window.innerHeight };
         // Run the common recalc function and see what magic it spits out.
-        var result = PopupContainerViewBase_1.recalcPositionFromLayoutData(windowDims, anchorRect, popupDims, this.props.activePopup.popupOptions.positionPriorities, this.props.activePopup.popupOptions.useInnerPositioning);
+        var result = (0, PopupContainerViewBase_1.recalcPositionFromLayoutData)(windowDims, anchorRect, popupDims, this.props.activePopup.popupOptions.positionPriorities, this.props.activePopup.popupOptions.useInnerPositioning);
         if (!result) {
             this._dismissPopup();
             return;

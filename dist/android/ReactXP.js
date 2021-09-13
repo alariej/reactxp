@@ -83,7 +83,7 @@ var ReactXP;
     ReactXP.UserPresence = UserPresence_1.default;
     ReactXP.View = View_1.default;
     var androidAnimatedClasses = __assign(__assign({}, Animated_1.CommonAnimatedClasses), { Text: RN.Animated.createAnimatedComponent(Text_1.default) });
-    ReactXP.Animated = Animated_1.makeAnimated(androidAnimatedClasses);
+    ReactXP.Animated = (0, Animated_1.makeAnimated)(androidAnimatedClasses);
     ReactXP.Types = RXTypes;
     ReactXP.Component = React.Component;
     ReactXP.createElement = React.createElement;

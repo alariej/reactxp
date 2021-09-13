@@ -338,7 +338,7 @@ var GestureView = /** @class */ (function (_super) {
     // and RN uses "locationX/Y", so we need to map one to the other.  Unfortunately, due to inertia,
     // web loses.  So, we need these 3 ugly functions...
     GestureView._reactTouchEventToBasic = function (e) {
-        var ne = lodashMini_1.clone(e);
+        var ne = (0, lodashMini_1.clone)(e);
         ne.changedTouches = this._mapReactTouchListToBasic(e.changedTouches);
         ne.targetTouches = this._mapReactTouchListToBasic(e.targetTouches);
         ne.touches = this._mapReactTouchListToBasic(e.touches);

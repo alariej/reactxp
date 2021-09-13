@@ -117,20 +117,30 @@ var PopupContainerView = /** @class */ (function (_super) {
         if (!this._mountedComponent) {
             return;
         }
-        assert_1.default(!!this.props.anchorHandle);
+        (0, assert_1.default)(!!this.props.anchorHandle);
         RN.NativeModules.UIManager.measureInWindow(this.props.anchorHandle, function (x, y, width, height) {
             if (!_this._mountedComponent) {
                 return;
             }
-            assert_1.default(!!_this._viewHandle);
+            (0, assert_1.default)(!!_this._viewHandle);
             var anchorRect = {
                 left: x, top: y, right: x + width, bottom: y + height,
-                width: width, height: height
+                width: width, height: height,
+                x: 0,
+                y: 0,
+                toJSON: function () {
+                    throw new Error('Function not implemented.');
+                }
             };
             RN.NativeModules.UIManager.measureInWindow(_this._viewHandle, function (x, y, width, height) {
                 var popupRect = {
                     left: x, top: y, right: x + width, bottom: y + height,
                     width: width, height: height,
+                    x: 0,
+                    y: 0,
+                    toJSON: function () {
+                        throw new Error('Function not implemented.');
+                    }
                 };
                 _this._recalcPositionFromLayoutData(anchorRect, popupRect);
             });
@@ -145,7 +155,7 @@ var PopupContainerView = /** @class */ (function (_super) {
             return;
         }
         // Make a copy of the old state.
-        var newState = lodashMini_1.extend({}, this.state);
+        var newState = (0, lodashMini_1.extend)({}, this.state);
         if (this.state.isMeasuringPopup) {
             newState.isMeasuringPopup = false;
             newState.popupWidth = popupRect.width;
@@ -155,13 +165,13 @@ var PopupContainerView = /** @class */ (function (_super) {
         var window = UserInterface_1.default.measureWindow(this.props.popupOptions.rootViewId);
         var windowDims = { width: window.width, height: window.height };
         // Run the common recalc function and see what magic it spits out.
-        var result = PopupContainerViewBase_1.recalcPositionFromLayoutData(windowDims, anchorRect, popupRect, this.props.popupOptions.positionPriorities, this.props.popupOptions.useInnerPositioning);
+        var result = (0, PopupContainerViewBase_1.recalcPositionFromLayoutData)(windowDims, anchorRect, popupRect, this.props.popupOptions.positionPriorities, this.props.popupOptions.useInnerPositioning);
         if (!result) {
             this._dismissPopup();
             return;
         }
-        lodashMini_1.extend(newState, result);
-        if (!lodashMini_1.isEqual(newState, this.state)) {
+        (0, lodashMini_1.extend)(newState, result);
+        if (!(0, lodashMini_1.isEqual)(newState, this.state)) {
             this.setState(newState);
         }
     };

@@ -341,7 +341,7 @@ var View = /** @class */ (function (_super) {
                 this.props.children));
         }
         return this.context.isRxParentAText ?
-            restyleForInlineText_1.default(reactElement) :
+            (0, restyleForInlineText_1.default)(reactElement) :
             reactElement;
     };
     View.prototype.UNSAFE_componentWillReceiveProps = function (nextProps) {
@@ -426,7 +426,7 @@ var View = /** @class */ (function (_super) {
     return View;
 }(ViewBase_1.default));
 exports.View = View;
-FocusManager_2.applyFocusableComponentMixin(View, function (nextProps) {
+(0, FocusManager_2.applyFocusableComponentMixin)(View, function (nextProps) {
     // VoiceOver with the VoiceOver key combinations (Ctrl+Option+Left/Right) focuses
     // <div>s when whatever tabIndex is set (even if tabIndex=-1). So, View is focusable
     // when tabIndex is not undefined.

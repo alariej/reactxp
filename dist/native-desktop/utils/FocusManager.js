@@ -175,7 +175,7 @@ function applyFocusableComponentMixin(Component, isConditionallyFocusable, acces
     if (accessibleOnly === void 0) { accessibleOnly = false; }
     // Call base
     // This adds the basic "monitor focusable components" functionality.
-    FocusManager_1.applyFocusableComponentMixin(Component, isConditionallyFocusable, accessibleOnly);
+    (0, FocusManager_1.applyFocusableComponentMixin)(Component, isConditionallyFocusable, accessibleOnly);
     // Hook 'getImportantForAccessibility'
     inheritMethod('getImportantForAccessibility', function (origCallback) {
         // Check local override first, then focus manager one

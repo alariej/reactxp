@@ -32,22 +32,22 @@ var Accessibility = /** @class */ (function (_super) {
     function Accessibility() {
         var _this = _super.call(this) || this;
         _this._isScreenReaderEnabled = false;
-        var initialStateChanged = false;
+        var initialScreenReaderState = false;
         // Some versions of RN don't support this interface.
         if (RN.AccessibilityInfo) {
             // Subscribe to an event to get notified when screen reader is enabled or disabled.
-            RN.AccessibilityInfo.addEventListener('change', function (isEnabled) {
-                initialStateChanged = true;
+            RN.AccessibilityInfo.addEventListener('screenReaderChanged', function (isEnabled) {
+                initialScreenReaderState = true;
                 _this._updateScreenReaderStatus(isEnabled);
             });
             // Fetch initial state.
-            RN.AccessibilityInfo.fetch().then(function (isEnabled) {
-                if (!initialStateChanged) {
+            RN.AccessibilityInfo.isScreenReaderEnabled().then(function (isEnabled) {
+                if (!initialScreenReaderState) {
                     _this._updateScreenReaderStatus(isEnabled);
                 }
             }).catch(function (err) {
                 if (AppConfig_1.default.isDevelopmentMode()) {
-                    console.error('Accessibility: RN.AccessibilityInfo.fetch failed');
+                    console.error('Accessibility: RN.AccessibilityInfo.isScreenReaderEnabled failed');
                 }
             });
         }

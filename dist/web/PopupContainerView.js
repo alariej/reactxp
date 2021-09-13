@@ -33,7 +33,7 @@ var PopupContainerView = /** @class */ (function (_super) {
         return _super.call(this, props, context) || this;
     }
     PopupContainerView.prototype.render = function () {
-        var style = lodashMini_1.clone(this.props.style);
+        var style = (0, lodashMini_1.clone)(this.props.style);
         if (this.props.hidden) {
             style.visibility = 'hidden';
         }

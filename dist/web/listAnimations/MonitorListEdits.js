@@ -53,7 +53,7 @@ function extractChildrenKeys(children) {
         React.Children.forEach(children, function (child, index) {
             if (child) {
                 var childReactElement = child;
-                assert_1.default(childReactElement.key !== undefined && childReactElement.key !== null, 'Children passed to a `View` with child animations enabled must have a `key`');
+                (0, assert_1.default)(childReactElement.key !== undefined && childReactElement.key !== null, 'Children passed to a `View` with child animations enabled must have a `key`');
                 if (childReactElement.key !== null) {
                     keys.push(childReactElement.key);
                 }
@@ -74,7 +74,7 @@ function createChildrenMap(children) {
         React.Children.forEach(children, function (child, index) {
             if (child) {
                 var childReactElement = child;
-                assert_1.default('key' in childReactElement, 'Children passed to a `View` with child animations enabled must have a `key`');
+                (0, assert_1.default)('key' in childReactElement, 'Children passed to a `View` with child animations enabled must have a `key`');
                 var index_1 = childReactElement.key;
                 if (index_1 !== null) {
                     map[index_1] = childReactElement;
@@ -128,7 +128,7 @@ var MonitorListEdits = /** @class */ (function (_super) {
         return this._phase !== ComponentPhaseEnum.animating;
     };
     MonitorListEdits.prototype.UNSAFE_componentWillUpdate = function (nextProps) {
-        assert_1.default(this._phase !== ComponentPhaseEnum.animating, 'componentWillUpdate should never run while the component is animating due to the implementation of shouldComponentUpdate');
+        (0, assert_1.default)(this._phase !== ComponentPhaseEnum.animating, 'componentWillUpdate should never run while the component is animating due to the implementation of shouldComponentUpdate');
         var prevChildrenKeys = this._childrenKeys;
         var nextChildrenKeys = extractChildrenKeys(nextProps.children);
         this._childrenKeys = nextChildrenKeys;
@@ -203,7 +203,7 @@ var MonitorListEdits = /** @class */ (function (_super) {
     };
     MonitorListEdits.prototype.componentDidUpdate = function (prevProps) {
         var _this = this;
-        assert_1.default(this._phase !== ComponentPhaseEnum.animating, 'componentDidUpdate should never run while the component is animating due to the implementation of shouldComponentUpdate');
+        (0, assert_1.default)(this._phase !== ComponentPhaseEnum.animating, 'componentDidUpdate should never run while the component is animating due to the implementation of shouldComponentUpdate');
         if (this._phase === ComponentPhaseEnum.willAnimate) {
             var phaseInfo_1 = this._willAnimatePhaseInfo;
             var prevPositions_1 = phaseInfo_1.prevPositions;
@@ -263,7 +263,7 @@ var MonitorListEdits = /** @class */ (function (_super) {
                 domElement: ReactDOM.findDOMNode(refValue),
             };
         }
-        assert_1.default(typeof reactElement.ref === 'function' || reactElement.ref === undefined || reactElement.ref === null, 'Invalid ref: ' + reactElement.ref + '. Only callback refs are supported when using child animations on a `View`');
+        (0, assert_1.default)(typeof reactElement.ref === 'function' || reactElement.ref === undefined || reactElement.ref === null, 'Invalid ref: ' + reactElement.ref + '. Only callback refs are supported when using child animations on a `View`');
         // If the creator of the reactElement also provided a ref, call it.
         if (typeof reactElement.ref === 'function') {
             reactElement.ref(refValue);

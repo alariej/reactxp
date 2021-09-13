@@ -22,15 +22,6 @@ export declare class Button extends ButtonBase {
     };
     context: ButtonContext;
     static childContextTypes: React.ValidationMap<any>;
-    private _mixin_componentDidMount;
-    private _mixin_componentWillUnmount;
-    touchableGetInitialState: () => RN.Touchable.State;
-    touchableHandleStartShouldSetResponder: () => boolean;
-    touchableHandleResponderTerminationRequest: () => boolean;
-    touchableHandleResponderGrant: (e: RN.GestureResponderEvent) => void;
-    touchableHandleResponderMove: (e: RN.GestureResponderEvent) => void;
-    touchableHandleResponderRelease: (e: RN.GestureResponderEvent) => void;
-    touchableHandleResponderTerminate: (e: RN.GestureResponderEvent) => void;
     protected _isMounted: boolean;
     protected _isMouseOver: boolean;
     protected _isHoverStarted: boolean;

@@ -24,7 +24,7 @@ var AppVisibilityUtils = /** @class */ (function () {
         this.onIdleEvent = new subscribableevent_1.default();
         this.onWakeUpEvent = new subscribableevent_1.default();
         this._wakeUpAndSetTimerForIdle = function () {
-            if (!lodashMini_1.isUndefined(_this._timer)) {
+            if (!(0, lodashMini_1.isUndefined)(_this._timer)) {
                 Timers_1.default.clearTimeout(_this._timer);
             }
             if (!_this.hasFocus()) {
