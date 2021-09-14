@@ -156,7 +156,7 @@ var Button = /** @class */ (function (_super) {
         var importantForAccessibility = this.getImportantForAccessibility();
         // We don't use 'string' ref type inside ReactXP
         var originalRef = internalProps.ref;
-        assert_1.default(!(typeof originalRef === 'string'), 'Button: ReactXP must not use string refs internally');
+        (0, assert_1.default)(!(typeof originalRef === 'string'), 'Button: ReactXP must not use string refs internally');
         var componentRef = originalRef;
         var focusableViewProps = __assign(__assign({}, internalProps), { ref: onMount, componentRef: componentRef, onMouseEnter: this._onMouseEnter, onMouseLeave: this._onMouseLeave, isTabStop: windowsTabFocusable, tabIndex: tabIndex, importantForAccessibility: importantForAccessibility, disableSystemFocusVisuals: false, handledKeyDownKeys: DOWN_KEYCODES, handledKeyUpKeys: UP_KEYCODES, onKeyDown: this._onKeyDown, onKeyUp: this._onKeyUp, onFocus: this._onFocus, onBlur: this._onBlur, onAccessibilityTap: this._onAccessibilityTap });
         return (React.createElement(FocusableAnimatedView, __assign({}, focusableViewProps), this.props.children));
@@ -225,5 +225,5 @@ var Button = /** @class */ (function (_super) {
     return Button;
 }(Button_1.Button));
 exports.Button = Button;
-FocusManager_1.applyFocusableComponentMixin(Button);
+(0, FocusManager_1.applyFocusableComponentMixin)(Button);
 exports.default = Button;

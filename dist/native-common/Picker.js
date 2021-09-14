@@ -49,7 +49,7 @@ var Picker = /** @class */ (function (_super) {
         return _this;
     }
     Picker.prototype.render = function () {
-        return (React.createElement(RN.Picker, { selectedValue: this.props.selectedValue, onValueChange: this.onValueChange, style: this.props.style, mode: this.props.mode, testID: this.props.testId }, lodashMini_1.map(this.props.items, function (i, idx) { return React.createElement(RN.Picker.Item, __assign({}, i, { key: idx })); })));
+        return (React.createElement(RN.Picker, { selectedValue: this.props.selectedValue, onValueChange: this.onValueChange, style: this.props.style, mode: this.props.mode, testID: this.props.testId }, (0, lodashMini_1.map)(this.props.items, function (i, idx) { return React.createElement(RN.Picker.Item, __assign({}, i, { key: idx })); })));
     };
     return Picker;
 }(RX.Picker));

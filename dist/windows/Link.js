@@ -157,7 +157,7 @@ var Link = /** @class */ (function (_super) {
         var importantForAccessibility = this.getImportantForAccessibility();
         // We don't use 'string' ref type inside ReactXP
         var originalRef = internalProps.ref;
-        assert_1.default(!(typeof originalRef === 'string'), 'Link: ReactXP must not use string refs internally');
+        (0, assert_1.default)(!(typeof originalRef === 'string'), 'Link: ReactXP must not use string refs internally');
         var componentRef = originalRef;
         var focusableTextProps = __assign(__assign({}, internalProps), { componentRef: componentRef, ref: this._onFocusableRef, isTabStop: windowsTabFocusable, tabIndex: tabIndex, importantForAccessibility: importantForAccessibility, disableSystemFocusVisuals: false, handledKeyDownKeys: DOWN_KEYCODES, handledKeyUpKeys: UP_KEYCODES, onKeyDown: this._onKeyDown, onKeyUp: this._onKeyUp, onFocus: this._onFocus, onAccessibilityTap: this._onPress });
         return focusableTextProps;
@@ -165,7 +165,7 @@ var Link = /** @class */ (function (_super) {
     Link.prototype._renderLinkAsNativeHyperlink = function (internalProps) {
         // We don't use 'string' ref type inside ReactXP
         var originalRef = internalProps.ref;
-        assert_1.default(!(typeof originalRef === 'string'), 'Link: ReactXP must not use string refs internally');
+        (0, assert_1.default)(!(typeof originalRef === 'string'), 'Link: ReactXP must not use string refs internally');
         return (React.createElement(RNW.HyperlinkWindows, __assign({}, internalProps, { ref: this._onNativeHyperlinkRef, onFocus: this._onFocus })));
     };
     Link.prototype.focus = function () {
@@ -231,5 +231,5 @@ var Link = /** @class */ (function (_super) {
     return Link;
 }(Link_1.LinkBase));
 exports.Link = Link;
-FocusManager_1.applyFocusableComponentMixin(Link);
+(0, FocusManager_1.applyFocusableComponentMixin)(Link);
 exports.default = Link;

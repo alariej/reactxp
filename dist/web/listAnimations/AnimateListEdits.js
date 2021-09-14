@@ -62,7 +62,7 @@ var AnimateListEdits = /** @class */ (function (_super) {
                     if (domNode) {
                         domNode.style.transform = 'translateY(' + -move.topDelta + 'px)';
                         counter++;
-                        executeTransition_1.default(domNode, [{
+                        (0, executeTransition_1.default)(domNode, [{
                                 property: 'opacity',
                                 from: 1,
                                 to: 0,
@@ -84,7 +84,7 @@ var AnimateListEdits = /** @class */ (function (_super) {
                 try {
                     var domNode = ReactDOM.findDOMNode(move.element);
                     if (domNode) {
-                        executeTransition_1.default(domNode, [{
+                        (0, executeTransition_1.default)(domNode, [{
                                 property: 'transform',
                                 from: 'translateY(' + -move.topDelta + 'px)',
                                 to: '',
@@ -106,7 +106,7 @@ var AnimateListEdits = /** @class */ (function (_super) {
                 try {
                     var domNode = ReactDOM.findDOMNode(move.element);
                     if (domNode) {
-                        executeTransition_1.default(domNode, [{
+                        (0, executeTransition_1.default)(domNode, [{
                                 property: 'opacity',
                                 from: 0,
                                 to: 1,
@@ -127,7 +127,7 @@ var AnimateListEdits = /** @class */ (function (_super) {
         var _this = this;
         // Do a shallow clone and remove the props that don't
         // apply to the MontiroListEdits component.
-        var props = lodashMini_1.clone(this.props);
+        var props = (0, lodashMini_1.clone)(this.props);
         delete props.animateChildEnter;
         delete props.animateChildLeave;
         delete props.animateChildMove;

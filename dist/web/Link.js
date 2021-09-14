@@ -137,5 +137,5 @@ var Link = /** @class */ (function (_super) {
     return Link;
 }(React.Component));
 exports.Link = Link;
-FocusManager_1.applyFocusableComponentMixin(Link);
+(0, FocusManager_1.applyFocusableComponentMixin)(Link);
 exports.default = Link;

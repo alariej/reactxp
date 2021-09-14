@@ -92,5 +92,5 @@ var TextInput = /** @class */ (function (_super) {
     return TextInput;
 }(TextInput_1.TextInput));
 exports.TextInput = TextInput;
-FocusManager_1.applyFocusableComponentMixin(TextInput);
+(0, FocusManager_1.applyFocusableComponentMixin)(TextInput);
 exports.default = TextInput;

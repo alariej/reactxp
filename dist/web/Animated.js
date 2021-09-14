@@ -587,7 +587,7 @@ function createAnimatedComponent(Component) {
             if (activeTransitions.length > 0) {
                 var domNode = this._getDomNode();
                 if (domNode) {
-                    executeTransition_1.executeTransition(domNode, activeTransitions, function () {
+                    (0, executeTransition_1.executeTransition)(domNode, activeTransitions, function () {
                         // Clear all of the active transitions and invoke the onEnd callbacks.
                         var completeTransitions = [];
                         _.each(_this._animatedAttributes, function (attrib) {

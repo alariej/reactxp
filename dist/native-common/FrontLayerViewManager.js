@@ -58,8 +58,15 @@ var FrontLayerViewManager = /** @class */ (function () {
                 if (activePopupContext.popupOptions.onAnchorPressed) {
                     RN.NativeModules.UIManager.measureInWindow(activePopupContext.anchorHandle, function (x, y, width, height) {
                         var touchEvent = e.nativeEvent;
-                        var anchorRect = { left: x, top: y, right: x + width,
-                            bottom: y + height, width: width, height: height };
+                        var anchorRect = {
+                            left: x, top: y, right: x + width,
+                            bottom: y + height, width: width, height: height,
+                            x: 0,
+                            y: 0,
+                            toJSON: function () {
+                                throw new Error('Function not implemented.');
+                            }
+                        };
                         // Find out if the press event was on the anchor so we can notify the caller about it.
                         if (!_.isUndefined(touchEvent.pageX) && !_.isUndefined(touchEvent.pageY) &&
                             touchEvent.pageX >= anchorRect.left && touchEvent.pageX < anchorRect.right

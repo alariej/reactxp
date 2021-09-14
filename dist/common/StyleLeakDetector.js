@@ -46,7 +46,7 @@ var StyleLeakDetector = /** @class */ (function () {
                 keys.push(key);
             }
         }
-        keys = lodashMini_1.sortBy(keys);
+        keys = (0, lodashMini_1.sortBy)(keys);
         var keysLength = keys.length;
         for (var i = 0; i < keysLength; i++) {
             var key = keys[i];

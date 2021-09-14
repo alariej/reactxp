@@ -143,7 +143,7 @@ var Styles = /** @class */ (function (_super) {
             StyleLeakDetector_1.default.detectLeaks(def);
             // Forbidden props are not allowed in uncached styles. Perform the
             // omit only in the cached path.
-            adaptedRuleSet = lodashMini_1.omit(adaptedRuleSet, forbiddenProps);
+            adaptedRuleSet = (0, lodashMini_1.omit)(adaptedRuleSet, forbiddenProps);
         }
         // Convert text styling
         var textStyle = adaptedRuleSet;
@@ -208,7 +208,7 @@ var Styles = /** @class */ (function (_super) {
         return AppConfig_1.default.isDevelopmentMode() ? Object.freeze(adaptedRuleSet) : adaptedRuleSet;
     };
     Styles.prototype._adaptAnimatedStyles = function (def) {
-        var adaptedRuleSet = lodashMini_1.omit(def, forbiddenProps);
+        var adaptedRuleSet = (0, lodashMini_1.omit)(def, forbiddenProps);
         return AppConfig_1.default.isDevelopmentMode() ? Object.freeze(adaptedRuleSet) : adaptedRuleSet;
     };
     return Styles;

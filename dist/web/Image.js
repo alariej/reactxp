@@ -326,7 +326,7 @@ var Image = /** @class */ (function (_super) {
         var source = this.props.source;
         var isSourceValid = !(typeof source !== 'string' && typeof source !== 'undefined');
         // Prepare image source (necessary as iOS implementation also allows objects)
-        assert_1.default(isSourceValid, "Types/web/Image only accepts string sources! You passed: " + source + " of type " + typeof source);
+        (0, assert_1.default)(isSourceValid, "Types/web/Image only accepts string sources! You passed: " + source + " of type " + typeof source);
         var optionalImg = null;
         if (this.state.showImgTag) {
             optionalImg = (React.createElement("img", { style: _styles.image, src: this.state.displayUrl, alt: this.props.accessibilityLabel, onError: this._imgOnError, onLoad: this._onLoad, ref: this._onMount }));
@@ -335,7 +335,7 @@ var Image = /** @class */ (function (_super) {
             optionalImg,
             this.props.children));
         return this.context.isRxParentAText ?
-            restyleForInlineText_1.default(reactElement) :
+            (0, restyleForInlineText_1.default)(reactElement) :
             reactElement;
     };
     Image.prototype._getStyles = function () {

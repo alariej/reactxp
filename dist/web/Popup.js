@@ -33,15 +33,15 @@ var Popup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Popup.prototype.show = function (options, popupId, delay) {
-        assert_1.default(popupId, "popupId must be a non-empty string. Actual: " + popupId);
+        (0, assert_1.default)(popupId, "popupId must be a non-empty string. Actual: " + popupId);
         return FrontLayerViewManager_1.default.showPopup(options, popupId, delay);
     };
     Popup.prototype.autoDismiss = function (popupId, delay) {
-        assert_1.default(popupId, "popupId must be a non-empty string. Actual: " + popupId);
+        (0, assert_1.default)(popupId, "popupId must be a non-empty string. Actual: " + popupId);
         FrontLayerViewManager_1.default.autoDismissPopup(popupId, delay);
     };
     Popup.prototype.dismiss = function (popupId) {
-        assert_1.default(popupId, "popupId must be a non-empty string. Actual: " + popupId);
+        (0, assert_1.default)(popupId, "popupId must be a non-empty string. Actual: " + popupId);
         FrontLayerViewManager_1.default.dismissPopup(popupId);
     };
     Popup.prototype.dismissAll = function () {

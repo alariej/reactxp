@@ -107,7 +107,7 @@ var Linking = /** @class */ (function (_super) {
     };
     Linking.prototype._filterValidEmails = function (emails) {
         var _this = this;
-        return lodashMini_1.filter(emails, function (e) { return _this._isEmailValid(e); });
+        return (0, lodashMini_1.filter)(emails, function (e) { return _this._isEmailValid(e); });
     };
     return Linking;
 }(RX.Linking));

@@ -63,7 +63,7 @@ function noop() { }
 function applyMixin(thisObj, mixin, propertiesToSkip) {
     Object.getOwnPropertyNames(mixin).forEach(function (name) {
         if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1 && typeof mixin[name].bind === 'function') {
-            assert_1.default(!(name in thisObj), "An object cannot have a method with the same name as one of its mixins: \"" + name + "\"");
+            (0, assert_1.default)(!(name in thisObj), "An object cannot have a method with the same name as one of its mixins: \"" + name + "\"");
             thisObj[name] = mixin[name].bind(thisObj);
         }
     });
@@ -71,7 +71,7 @@ function applyMixin(thisObj, mixin, propertiesToSkip) {
 function removeMixin(thisObj, mixin, propertiesToSkip) {
     Object.getOwnPropertyNames(mixin).forEach(function (name) {
         if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1) {
-            assert_1.default((name in thisObj), "An object is missing a mixin method: \"" + name + "\"");
+            (0, assert_1.default)((name in thisObj), "An object is missing a mixin method: \"" + name + "\"");
             delete thisObj[name];
         }
     });
@@ -81,7 +81,7 @@ function extractChildrenKeys(children) {
     React.Children.forEach(children, function (child, index) {
         if (child) {
             var childReactElement = child;
-            assert_1.default(childReactElement.key !== undefined && childReactElement.key !== null, 'Children passed to a `View` with child animations enabled must have a `key`');
+            (0, assert_1.default)(childReactElement.key !== undefined && childReactElement.key !== null, 'Children passed to a `View` with child animations enabled must have a `key`');
             if (childReactElement.key !== null) {
                 keys.push(childReactElement.key);
             }
@@ -182,7 +182,7 @@ var View = /** @class */ (function (_super) {
         //
         // The web implementation doesn't support string refs. For consistency, do the same assert
         // in the native implementation.
-        assert_1.default(findInvalidRefs(nextProps.children).length === 0, 'Invalid ref(s): ' + JSON.stringify(findInvalidRefs(nextProps.children)) +
+        (0, assert_1.default)(findInvalidRefs(nextProps.children).length === 0, 'Invalid ref(s): ' + JSON.stringify(findInvalidRefs(nextProps.children)) +
             ' Only callback refs are supported when using child animations on a `View`');
         var prevChildrenKeys = this._childrenKeys || [];
         var nextChildrenKeys = extractChildrenKeys(nextProps.children);
@@ -236,13 +236,16 @@ var View = /** @class */ (function (_super) {
             this.touchableHandleActivePressIn = this.touchableHandleActivePressIn.bind(this);
             this.touchableHandleActivePressOut = this.touchableHandleActivePressOut.bind(this);
             this.touchableGetHighlightDelayMS = this.touchableGetHighlightDelayMS.bind(this);
+            // @ts-ignore
             applyMixin(this, RN.Touchable.Mixin, [
                 // Properties that View and RN.Touchable.Mixin have in common. View needs
                 // to dispatch these methods to RN.Touchable.Mixin manually.
                 'componentDidMount',
                 'componentWillUnmount',
             ]);
+            // @ts-ignore
             this._mixin_componentDidMount = RN.Touchable.Mixin.componentDidMount || noop;
+            // @ts-ignore
             this._mixin_componentWillUnmount = RN.Touchable.Mixin.componentWillUnmount || noop;
             if (initial) {
                 this.state = this.touchableGetInitialState();
@@ -253,6 +256,7 @@ var View = /** @class */ (function (_super) {
             this._mixinIsApplied = true;
         }
         else if (!isButton && this._mixinIsApplied) {
+            // @ts-ignore
             removeMixin(this, RN.Touchable.Mixin, [
                 'componentDidMount',
                 'componentWillUnmount',
@@ -281,7 +285,7 @@ var View = /** @class */ (function (_super) {
      * as on android that would lead to extra layers of Views.
      */
     View.prototype._buildInternalProps = function (props) {
-        this._internalProps = lodashMini_1.clone(props);
+        this._internalProps = (0, lodashMini_1.clone)(props);
         this._internalProps.ref = this._setNativeComponent;
         if (props.testId) {
             // Convert from testId to testID.
@@ -309,7 +313,7 @@ var View = /** @class */ (function (_super) {
                 macAccessibilityProps.onClick = props.onPress;
             }
         }
-        this._internalProps = lodashMini_1.extend(this._internalProps, accessibilityProps);
+        this._internalProps = (0, lodashMini_1.extend)(this._internalProps, accessibilityProps);
         if (props.onLayout) {
             this._internalProps.onLayout = this._onLayout;
         }
@@ -335,7 +339,7 @@ var View = /** @class */ (function (_super) {
                 onResponderRelease: this.props.onResponderRelease || this.touchableHandleResponderRelease,
                 onResponderTerminate: this.props.onResponderTerminate || this.touchableHandleResponderTerminate,
             };
-            this._internalProps = lodashMini_1.extend(this._internalProps, responderProps);
+            this._internalProps = (0, lodashMini_1.extend)(this._internalProps, responderProps);
             if (!this.props.disableTouchOpacityAnimation) {
                 var opacityValueFromProps = this._getDefaultOpacityValue(props);
                 if (this._defaultOpacityValue !== opacityValueFromProps) {

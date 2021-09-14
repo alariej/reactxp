@@ -19,7 +19,7 @@ var assert_1 = require("../../common/assert");
 var lodashMini_1 = require("./../utils/lodashMini");
 function restyleForInlineText(reactElement) {
     var style = reactElement.props.style;
-    assert_1.default(style &&
+    (0, assert_1.default)(style &&
         style.width !== undefined &&
         style.height !== undefined, 'Children of an <RX.Text> must have a defined height and width');
     /*
@@ -42,7 +42,7 @@ function restyleForInlineText(reactElement) {
         with inline-block this will properly resolve as "[text node][transparent text][text node]"
     */
     return React.cloneElement(reactElement, {
-        style: lodashMini_1.assign({}, style, {
+        style: (0, lodashMini_1.assign)({}, style, {
             display: 'inline-block',
             // Reset the line height so the value from outside
             // the inlined item doesn't cascade into this element.

@@ -101,7 +101,7 @@ var Text = /** @class */ (function (_super) {
         return { isRxParentAText: true };
     };
     Text.prototype._getStyles = function () {
-        return lodashMini_1.compact([_styles.defaultText, this.props.style]);
+        return (0, lodashMini_1.compact)([_styles.defaultText, this.props.style]);
     };
     Text.prototype.requestFocus = function () {
         var _this = this;
