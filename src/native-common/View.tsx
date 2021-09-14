@@ -143,6 +143,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
     protected _internalProps: any = {};
 
     // Assigned when mixin is applied
+    // @ts-ignore
     touchableGetInitialState!: () => RN.Touchable.State;
     touchableHandleStartShouldSetResponder!: () => boolean;
     touchableHandleResponderTerminationRequest!: () => boolean;
@@ -272,6 +273,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
             this.touchableHandleActivePressOut = this.touchableHandleActivePressOut!.bind(this);
             this.touchableGetHighlightDelayMS = this.touchableGetHighlightDelayMS!.bind(this);
 
+            // @ts-ignore
             applyMixin(this, RN.Touchable.Mixin, [
                 // Properties that View and RN.Touchable.Mixin have in common. View needs
                 // to dispatch these methods to RN.Touchable.Mixin manually.
@@ -279,7 +281,9 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
                 'componentWillUnmount',
             ]);
 
+            // @ts-ignore
             this._mixin_componentDidMount = RN.Touchable.Mixin.componentDidMount || noop;
+            // @ts-ignore
             this._mixin_componentWillUnmount = RN.Touchable.Mixin.componentWillUnmount || noop;
 
             if (initial) {
@@ -290,6 +294,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
 
             this._mixinIsApplied = true;
         } else if (!isButton && this._mixinIsApplied) {
+            // @ts-ignore
             removeMixin(this, RN.Touchable.Mixin, [
                 'componentDidMount',
                 'componentWillUnmount',

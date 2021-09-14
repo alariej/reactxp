@@ -41,7 +41,6 @@ const _styles = {
 
 const _isNativeMacOs = Platform.getType() === 'macos';
 
-const _defaultAccessibilityTrait = Types.AccessibilityTrait.Button;
 const _defaultImportantForAccessibility = Types.ImportantForAccessibility.Yes;
 
 const _defaultActiveOpacity = 0.2;
@@ -81,10 +80,13 @@ export class Button extends ButtonBase {
         hasRxButtonAscendant: PropTypes.bool,
     };
 
+    // @ts-ignore
     private _mixin_componentDidMount = RN.Touchable.Mixin.componentDidMount || noop;
+    // @ts-ignore
     private _mixin_componentWillUnmount = RN.Touchable.Mixin.componentWillUnmount || noop;
 
     // These are provided by mixin applied in the constructor
+    // @ts-ignore
     touchableGetInitialState!: () => RN.Touchable.State;
     touchableHandleStartShouldSetResponder!: () => boolean;
     touchableHandleResponderTerminationRequest!: () => boolean;
@@ -105,6 +107,7 @@ export class Button extends ButtonBase {
 
     constructor(props: Types.ButtonProps, context?: ButtonContext) {
         super(props, context);
+        // @ts-ignore
         applyMixin(this, RN.Touchable.Mixin, [
             // Properties that Button and RN.Touchable.Mixin have in common. Button needs
             // to dispatch these methods to RN.Touchable.Mixin manually.
@@ -133,10 +136,6 @@ export class Button extends ButtonBase {
         // Accessibility props.
         const importantForAccessibility = AccessibilityUtil.importantForAccessibilityToString(this.props.importantForAccessibility,
             _defaultImportantForAccessibility);
-        const accessibilityTrait = AccessibilityUtil.accessibilityTraitToString(this.props.accessibilityTraits,
-            _defaultAccessibilityTrait, true);
-        const accessibilityComponentType = AccessibilityUtil.accessibilityComponentTypeToString(this.props.accessibilityTraits,
-            _defaultAccessibilityTrait);
 
         const opacityStyle = this.props.disableTouchOpacityAnimation ? undefined : this._opacityAnimatedStyle;
         let disabledStyle = this.props.disabled ? _styles.disabled : undefined;
@@ -155,8 +154,6 @@ export class Button extends ButtonBase {
             style: Styles.combine([_styles.defaultButton as any, this.props.style, opacityStyle,
                 disabledStyle]) as RN.StyleProp<RN.ViewStyle>,
             accessibilityLabel: this.props.accessibilityLabel || this.props.title,
-            accessibilityTraits: accessibilityTrait,
-            accessibilityComponentType: accessibilityComponentType,
             importantForAccessibility: importantForAccessibility,
             onStartShouldSetResponder: this.touchableHandleStartShouldSetResponder,
             onResponderTerminationRequest: this.touchableHandleResponderTerminationRequest,

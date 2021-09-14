@@ -74,8 +74,6 @@ export abstract class GestureView extends GestureViewCommon {
     render() {
         const importantForAccessibility = AccessibilityUtil.importantForAccessibilityToString(this.props.importantForAccessibility,
             _defaultImportantForAccessibility);
-        const accessibilityTrait = AccessibilityUtil.accessibilityTraitToString(this.props.accessibilityTraits);
-        const accessibilityComponentType = AccessibilityUtil.accessibilityComponentTypeToString(this.props.accessibilityTraits);
 
         const extendedProps: RN.ExtendedViewProps & MacComponentAccessibilityProps = {
             onFocus: this.props.onFocus,
@@ -96,8 +94,6 @@ export abstract class GestureView extends GestureViewCommon {
                 ref={ this._onRef }
                 style={ [ViewBase.getDefaultViewStyle(), this.props.style] as RN.StyleProp<RN.ViewStyle> }
                 importantForAccessibility={ importantForAccessibility }
-                accessibilityTraits={ accessibilityTrait }
-                accessibilityComponentType={ accessibilityComponentType }
                 accessibilityLabel={ this.props.accessibilityLabel }
                 testID={ this.props.testId }
                 { ...this._panResponder.panHandlers }
