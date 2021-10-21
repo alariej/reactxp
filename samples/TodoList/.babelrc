@@ -1,9 +1,0 @@
-{
-    "presets": [
-        "module:metro-react-native-babel-preset"
-    ],
-    "plugins": [
-        "lodash",
-        "./buildtools/inline-require.js"
-    ]
-}
