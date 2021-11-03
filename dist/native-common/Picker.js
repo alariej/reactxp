@@ -36,7 +36,7 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Picker = void 0;
 var React = require("react");
-var RN = require("react-native");
+var picker_1 = require("@react-native-picker/picker");
 var RX = require("../common/Interfaces");
 var lodashMini_1 = require("./utils/lodashMini");
 var Picker = /** @class */ (function (_super) {
@@ -49,7 +49,7 @@ var Picker = /** @class */ (function (_super) {
         return _this;
     }
     Picker.prototype.render = function () {
-        return (React.createElement(RN.Picker, { selectedValue: this.props.selectedValue, onValueChange: this.onValueChange, style: this.props.style, mode: this.props.mode, testID: this.props.testId }, (0, lodashMini_1.map)(this.props.items, function (i, idx) { return React.createElement(RN.Picker.Item, __assign({}, i, { key: idx })); })));
+        return (React.createElement(picker_1.Picker, { selectedValue: this.props.selectedValue, onValueChange: this.onValueChange, style: this.props.style, mode: this.props.mode, testID: this.props.testId }, (0, lodashMini_1.map)(this.props.items, function (i, idx) { return React.createElement(picker_1.Picker.Item, __assign({}, i, { key: idx })); })));
     };
     return Picker;
 }(RX.Picker));
