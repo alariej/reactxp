@@ -36,12 +36,12 @@ var Modal = /** @class */ (function (_super) {
         return FrontLayerViewManager_1.default.isModalDisplayed(modalId);
     };
     Modal.prototype.show = function (modal, modalId, options) {
-        (0, assert_1.default)(modal, "modal must be valid. Actual: " + modal);
-        (0, assert_1.default)(modalId, "modalId must be a non-empty string. Actual: " + modalId);
+        (0, assert_1.default)(modal, "modal must be valid. Actual: ".concat(modal));
+        (0, assert_1.default)(modalId, "modalId must be a non-empty string. Actual: ".concat(modalId));
         FrontLayerViewManager_1.default.showModal(modal, modalId, options);
     };
     Modal.prototype.dismiss = function (modalId) {
-        (0, assert_1.default)(modalId, "modalId must be a non-empty string. Actual: " + modalId);
+        (0, assert_1.default)(modalId, "modalId must be a non-empty string. Actual: ".concat(modalId));
         FrontLayerViewManager_1.default.dismissModal(modalId);
     };
     Modal.prototype.dismissAll = function () {

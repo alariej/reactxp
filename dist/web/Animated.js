@@ -772,7 +772,7 @@ function createAnimatedComponent(Component) {
             return (React.createElement(Component, __assign({ style: this._processedStyle }, this._propsWithoutStyle, { ref: this._onMount }), this.props.children));
         };
         // Update the component's display name for easy debugging in react devtools extension
-        AnimatedComponentGenerated.displayName = "Animated." + (Component.displayName || Component.name || 'Component');
+        AnimatedComponentGenerated.displayName = "Animated.".concat(Component.displayName || Component.name || 'Component');
         return AnimatedComponentGenerated;
     }(React.Component));
     return AnimatedComponentGenerated;

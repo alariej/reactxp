@@ -326,7 +326,7 @@ var Image = /** @class */ (function (_super) {
         var source = this.props.source;
         var isSourceValid = !(typeof source !== 'string' && typeof source !== 'undefined');
         // Prepare image source (necessary as iOS implementation also allows objects)
-        (0, assert_1.default)(isSourceValid, "Types/web/Image only accepts string sources! You passed: " + source + " of type " + typeof source);
+        (0, assert_1.default)(isSourceValid, "Types/web/Image only accepts string sources! You passed: ".concat(source, " of type ").concat(typeof source));
         var optionalImg = null;
         if (this.state.showImgTag) {
             optionalImg = (React.createElement("img", { style: _styles.image, src: this.state.displayUrl, alt: this.props.accessibilityLabel, onError: this._imgOnError, onLoad: this._onLoad, ref: this._onMount }));
@@ -346,7 +346,7 @@ var Image = /** @class */ (function (_super) {
         // It is necessary to wrap the url in quotes as in url("a.jpg?q=(a and b)").
         // If the url is unquoted and contains paranthesis, e.g. a.jpg?q=(a and b), it will become url(a.jpg?q=(a and b))
         // which will not render on the screen.
-        var backgroundImage = "url(\"" + this.state.displayUrl + "\")";
+        var backgroundImage = "url(\"".concat(this.state.displayUrl, "\")");
         // Types doesn't support border styles other than "solid" for images.
         var borderStyle = styles.borderWidth ? 'solid' : 'none';
         return __assign(__assign({}, styles), { backgroundPosition: 'center center', backgroundRepeat: backgroundRepeat, backgroundImage: backgroundImage, backgroundSize: backgroundSize, borderStyle: borderStyle, display: 'flex' });

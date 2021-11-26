@@ -72,7 +72,7 @@ function noop() { }
 function applyMixin(thisObj, mixin, propertiesToSkip) {
     Object.getOwnPropertyNames(mixin).forEach(function (name) {
         if (name !== 'constructor' && propertiesToSkip.indexOf(name) === -1 && typeof mixin[name].bind === 'function') {
-            (0, assert_1.default)(!(name in thisObj), "An object cannot have a method with the same name as one of its mixins: \"" + name + "\"");
+            (0, assert_1.default)(!(name in thisObj), "An object cannot have a method with the same name as one of its mixins: \"".concat(name, "\""));
             thisObj[name] = mixin[name].bind(thisObj);
         }
     });

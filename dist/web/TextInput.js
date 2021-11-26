@@ -54,7 +54,7 @@ var TextInputPlaceholderSupport = /** @class */ (function () {
     }
     TextInputPlaceholderSupport.getClassName = function (color) {
         var key = this._colorKey(color);
-        return "reactxp-placeholder-" + key;
+        return "reactxp-placeholder-".concat(key);
     };
     TextInputPlaceholderSupport.addRef = function (color) {
         if (typeof document === undefined) {
@@ -106,9 +106,9 @@ var TextInputPlaceholderSupport = /** @class */ (function () {
         ];
         return selectors
             .map(function (pseudoSelector) {
-            return "." + className + pseudoSelector + " {\n" +
+            return ".".concat(className).concat(pseudoSelector, " {\n") +
                 "  opacity: 1;\n" +
-                ("  color: " + placeholderColor + ";\n") +
+                "  color: ".concat(placeholderColor, ";\n") +
                 "}";
         }).join('\n');
     };

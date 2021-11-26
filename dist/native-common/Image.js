@@ -96,7 +96,7 @@ var Image = /** @class */ (function (_super) {
     Image.getMetadata = function (url) {
         return Image.prefetch(url).then(function (success) {
             if (!success) {
-                return Promise.reject("Prefetching url " + url + " did not succeed.");
+                return Promise.reject("Prefetching url ".concat(url, " did not succeed."));
             }
             else {
                 var defer_1 = new PromiseDefer_1.Defer();
