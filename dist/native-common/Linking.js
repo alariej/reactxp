@@ -37,20 +37,8 @@ var Linking = /** @class */ (function (_super) {
         return _this;
     }
     Linking.prototype._openUrl = function (url) {
-        return RN.Linking.canOpenURL(url)
-            .then(function (value) {
-            if (!value) {
-                var linkingError = {
-                    code: Interfaces_1.Types.LinkingErrorCode.NoAppFound,
-                    url: url,
-                    description: 'No app found to handle url: ' + url,
-                };
-                return Promise.reject(linkingError);
-            }
-            else {
-                return RN.Linking.openURL(url);
-            }
-        }).catch(function (error) {
+        return RN.Linking.openURL(url)
+            .catch(function (error) {
             var linkingError = {
                 code: Interfaces_1.Types.LinkingErrorCode.UnexpectedFailure,
                 url: url,

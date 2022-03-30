@@ -22,19 +22,8 @@ export class Linking extends CommonLinking {
     }
 
     protected _openUrl(url: string): Promise<void> {
-        return RN.Linking.canOpenURL(url)
-            .then(value => {
-                if (!value) {
-                    const linkingError: Types.LinkingErrorInfo = {
-                        code: Types.LinkingErrorCode.NoAppFound,
-                        url: url,
-                        description: 'No app found to handle url: ' + url,
-                    };
-                    return Promise.reject(linkingError);
-                } else {
-                    return RN.Linking.openURL(url);
-                }
-            }).catch(error => {
+        return RN.Linking.openURL(url)
+            .catch(error => {
                 const linkingError: Types.LinkingErrorInfo = {
                     code: Types.LinkingErrorCode.UnexpectedFailure,
                     url: url,
