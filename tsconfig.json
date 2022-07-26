@@ -13,6 +13,7 @@
         "noResolve": false,
         "target": "es5",
         "module": "commonjs",
+        "moduleResolution": "NodeNext",
         "outDir": "dist",
         "types": ["lodash", "react", "react-dom", "react-native"],
         "jsx": "react",
