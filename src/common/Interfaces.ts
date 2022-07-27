@@ -169,13 +169,6 @@ export abstract class Link extends React.Component<Types.LinkProps> implements F
     abstract blur(): void;
 }
 
-export abstract class Storage {
-    abstract getItem(key: string): Promise<string | undefined>;
-    abstract setItem(key: string, value: string): Promise<void>;
-    abstract removeItem(key: string): Promise<void>;
-    abstract clear(): Promise<void>;
-}
-
 export abstract class Location {
     abstract isAvailable(): boolean;
     abstract setConfiguration(config: LocationConfiguration): void;

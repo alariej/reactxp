@@ -50,8 +50,6 @@ export declare module ReactXP {
     export let ScrollView: RX.ScrollViewConstructor;
     export type StatusBar = RX.StatusBar;
     export let StatusBar: RX.StatusBar;
-    export type Storage = RX.Storage;
-    export let Storage: RX.Storage;
     export type Styles = RX.Styles;
     export let Styles: RX.Styles;
     export type Text = RX.Text;

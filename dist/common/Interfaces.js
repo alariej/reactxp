@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GestureView = exports.View = exports.ViewBase = exports.UserPresence = exports.TextInput = exports.Text = exports.Styles = exports.StatusBar = exports.Input = exports.Platform = exports.Location = exports.Storage = exports.Link = exports.Clipboard = exports.Image = exports.Component = exports.Picker = exports.Button = exports.Accessibility = exports.Linking = exports.Popup = exports.Modal = exports.UserInterface = exports.App = exports.AnimatedView = exports.AnimatedTextInput = exports.AnimatedText = exports.AnimatedImage = exports.AnimatedComponent = exports.Alert = exports.ActivityIndicator = exports.Types = void 0;
+exports.GestureView = exports.View = exports.ViewBase = exports.UserPresence = exports.TextInput = exports.Text = exports.Styles = exports.StatusBar = exports.Input = exports.Platform = exports.Location = exports.Link = exports.Clipboard = exports.Image = exports.Component = exports.Picker = exports.Button = exports.Accessibility = exports.Linking = exports.Popup = exports.Modal = exports.UserInterface = exports.App = exports.AnimatedView = exports.AnimatedTextInput = exports.AnimatedText = exports.AnimatedImage = exports.AnimatedComponent = exports.Alert = exports.ActivityIndicator = exports.Types = void 0;
 var React = require("react");
 var subscribableevent_1 = require("subscribableevent");
 var AppConfig_1 = require("./AppConfig");
@@ -180,12 +180,6 @@ var Link = /** @class */ (function (_super) {
     return Link;
 }(React.Component));
 exports.Link = Link;
-var Storage = /** @class */ (function () {
-    function Storage() {
-    }
-    return Storage;
-}());
-exports.Storage = Storage;
 var Location = /** @class */ (function () {
     function Location() {
     }

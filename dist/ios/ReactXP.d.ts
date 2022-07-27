@@ -49,8 +49,6 @@ declare module ReactXP {
     let ScrollView: RXInterfaces.ScrollViewConstructor;
     type StatusBar = RXInterfaces.StatusBar;
     let StatusBar: RXInterfaces.StatusBar;
-    type Storage = RXInterfaces.Storage;
-    let Storage: RXInterfaces.Storage;
     type Styles = RXInterfaces.Styles;
     let Styles: RXInterfaces.Styles;
     type Text = RXInterfaces.Text;

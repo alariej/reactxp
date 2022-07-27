@@ -36,7 +36,6 @@ import { Picker as PickerImpl } from './Picker';
 import PlatformImpl from './Platform';
 import { ScrollView as ScrollViewImpl } from './ScrollView';
 import StatusBarImpl from './StatusBar';
-import StorageImpl from './Storage';
 import StylesImpl from './Styles';
 import { Text as TextImpl } from './Text';
 import { TextInput as TextInputImpl } from './TextInput';
@@ -91,8 +90,6 @@ module ReactXP {
     export let ScrollView: RXInterfaces.ScrollViewConstructor = ScrollViewImpl;
     export type StatusBar = RXInterfaces.StatusBar;
     export let StatusBar: RXInterfaces.StatusBar = StatusBarImpl;
-    export type Storage = RXInterfaces.Storage;
-    export let Storage: RXInterfaces.Storage = StorageImpl;
     export type Styles = RXInterfaces.Styles;
     export let Styles: RXInterfaces.Styles = StylesImpl;
     export type Text = RXInterfaces.Text;

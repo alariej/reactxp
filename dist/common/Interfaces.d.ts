@@ -116,12 +116,6 @@ export declare abstract class Link extends React.Component<Types.LinkProps> impl
     abstract requestFocus(): void;
     abstract blur(): void;
 }
-export declare abstract class Storage {
-    abstract getItem(key: string): Promise<string | undefined>;
-    abstract setItem(key: string, value: string): Promise<void>;
-    abstract removeItem(key: string): Promise<void>;
-    abstract clear(): Promise<void>;
-}
 export declare abstract class Location {
     abstract isAvailable(): boolean;
     abstract setConfiguration(config: LocationConfiguration): void;

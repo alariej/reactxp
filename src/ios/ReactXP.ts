@@ -29,7 +29,6 @@ import PickerImpl from '../native-common/Picker';
 import PlatformImpl from '../native-common/Platform';
 import PopupImpl from '../native-common/Popup';
 import ScrollViewImpl from '../native-common/ScrollView';
-import StorageImpl from '../native-common/Storage';
 import StylesImpl from '../native-common/Styles';
 import TextImpl from '../native-common/Text';
 import TextInputImpl from '../native-common/TextInput';
@@ -88,8 +87,6 @@ module ReactXP {
     export let ScrollView: RXInterfaces.ScrollViewConstructor = ScrollViewImpl;
     export type StatusBar = RXInterfaces.StatusBar;
     export let StatusBar: RXInterfaces.StatusBar = StatusBarImpl;
-    export type Storage = RXInterfaces.Storage;
-    export let Storage: RXInterfaces.Storage = StorageImpl;
     export type Styles = RXInterfaces.Styles;
     export let Styles: RXInterfaces.Styles = StylesImpl;
     export type Text = RXInterfaces.Text;
