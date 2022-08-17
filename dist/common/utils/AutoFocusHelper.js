@@ -28,9 +28,10 @@ var FocusArbitratorProvider = /** @class */ (function () {
     function FocusArbitratorProvider(view, arbitrator) {
         this._candidates = [];
         this._pendingChildren = {};
+        var context = view === null || view === void 0 ? void 0 : view.context;
         this._id = ++_lastFocusArbitratorProviderId;
         this._parentArbitratorProvider = view
-            ? ((view.context && view.context.focusArbitrator) || rootFocusArbitratorProvider)
+            ? ((context && context.focusArbitrator) || rootFocusArbitratorProvider)
             : undefined;
         this._arbitratorCallback = arbitrator;
     }
@@ -107,12 +108,13 @@ var FocusArbitratorProvider = /** @class */ (function () {
         this._arbitratorCallback = arbitrator;
     };
     FocusArbitratorProvider.requestFocus = function (component, focus, isAvailable, type) {
+        var context = component === null || component === void 0 ? void 0 : component.context;
         if (_autoFocusTimer) {
             Timers_1.default.clearTimeout(_autoFocusTimer);
         }
         var focusArbitratorProvider = ((component._focusArbitratorProvider instanceof FocusArbitratorProvider) &&
             component._focusArbitratorProvider) ||
-            (component.context && component.context.focusArbitrator) ||
+            (context && context.focusArbitrator) ||
             rootFocusArbitratorProvider;
         focusArbitratorProvider._requestFocus(component, focus, isAvailable, type || FocusCandidateType.Focus);
         _autoFocusTimer = Timers_1.default.setTimeout(function () {

@@ -32,6 +32,10 @@ export interface FocusCandidateInternal {
     accessibilityId?: string;
 }
 
+interface ViewContext {
+    focusArbitrator?: FocusArbitratorProvider;
+}
+
 export type SortAndFilterFunc = (candidates: FocusCandidateInternal[]) => FocusCandidateInternal[];
 
 export function setSortAndFilterFunc(sortAndFilter: SortAndFilterFunc): void {
@@ -47,9 +51,11 @@ export class FocusArbitratorProvider {
     private _pendingChildren: { [key: string]: FocusArbitratorProvider } = {};
 
     constructor(view?: RX.View, arbitrator?: RX.Types.FocusArbitrator) {
+        const context = view?.context as ViewContext;
+
         this._id = ++_lastFocusArbitratorProviderId;
         this._parentArbitratorProvider = view
-            ? ((view.context && view.context.focusArbitrator) || rootFocusArbitratorProvider)
+            ? ((context && context.focusArbitrator) || rootFocusArbitratorProvider)
             : undefined;
         this._arbitratorCallback = arbitrator;
     }
@@ -152,6 +158,8 @@ export class FocusArbitratorProvider {
     static requestFocus(component: React.Component<any, any>, focus: () => void, isAvailable: () => boolean,
             type?: FocusCandidateType): void {
 
+        const context = component?.context as ViewContext;
+
         if (_autoFocusTimer) {
             Timers.clearTimeout(_autoFocusTimer);
         }
@@ -159,7 +167,7 @@ export class FocusArbitratorProvider {
         const focusArbitratorProvider: FocusArbitratorProvider =
             (((component as any)._focusArbitratorProvider instanceof FocusArbitratorProvider) &&
              (component as any)._focusArbitratorProvider) ||
-            (component.context && component.context.focusArbitrator) ||
+            (context && context.focusArbitrator) ||
             rootFocusArbitratorProvider;
 
         focusArbitratorProvider._requestFocus(component, focus, isAvailable, type || FocusCandidateType.Focus);

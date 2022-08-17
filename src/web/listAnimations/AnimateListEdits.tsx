@@ -117,7 +117,6 @@ export class AnimateListEdits extends React.Component<AnimateListEditsProps, Typ
                 componentWillAnimate={ (edits: Edits, done: () => void) => this._handleWillAnimate(edits, done) }
                 { ...props }
             >
-                { this.props.children }
             </MonitorListEdits>
         );
     }

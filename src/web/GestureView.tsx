@@ -143,12 +143,14 @@ export abstract class GestureView extends GestureViewCommon {
     }
 
     private _createMouseResponder(container: HTMLElement) {
+        const context = this.context as GestureViewContext;
+
         this._disposeMouseResponder();
 
         this._responder = MouseResponder.create({
             id: this._id,
             target: container,
-            disableWhenModal: !!this.context.isInRxMainView,
+            disableWhenModal: !!context.isInRxMainView,
             shouldBecomeFirstResponder: (event: MouseEvent) => {
                 if (!this.props.onPan && !this.props.onPanHorizontal && !this.props.onPanVertical) {
                     return false;

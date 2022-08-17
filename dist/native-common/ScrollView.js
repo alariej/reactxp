@@ -131,7 +131,6 @@ var ScrollView = /** @class */ (function (_super) {
         // We also set removeClippedSubviews to false, overriding the default value. Most of the scroll views
         // we use are virtualized anyway.
         var internalProps = {
-            ref: this._setNativeComponent,
             // Bug in react-native.d.ts.  style should be "style?: StyleProp<ScrollViewStyle>;" but instead is ViewStyle.
             style: this.props.style,
             onScroll: scrollHandler,

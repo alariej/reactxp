@@ -6,14 +6,14 @@
  *
  * RN-specific implementation of the cross-platform ScrollView abstraction.
  */
-import * as React from 'react';
+/// <reference types="react" />
 import * as RN from 'react-native';
 import * as RX from '../common/Interfaces';
 import ViewBase from './ViewBase';
 export declare class ScrollView extends ViewBase<RX.Types.ScrollViewProps, RX.Types.Stateless, RN.ScrollView, RX.ScrollView> implements RX.ScrollView {
     private _scrollTop;
     private _scrollLeft;
-    protected _render(nativeProps: RN.ScrollViewProps & React.Props<RN.ScrollView>): JSX.Element;
+    protected _render(nativeProps: RN.ScrollViewProps): JSX.Element;
     render(): JSX.Element;
     private _onScroll;
     setScrollTop(scrollTop: number, animate?: boolean): void;

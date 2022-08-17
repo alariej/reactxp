@@ -6,10 +6,10 @@
  *
  * RN Windows/OSX-specific implementation of the cross-platform ScrollView abstraction.
  */
-import * as React from 'react';
+/// <reference types="react" />
 import * as RN from 'react-native';
 import { ScrollView as ScrollViewBase } from '../native-common/ScrollView';
-declare type ScrollViewProps = RN.ScrollViewProps & React.Props<RN.ScrollView>;
+declare type ScrollViewProps = RN.ScrollViewProps;
 export declare class ScrollView extends ScrollViewBase {
     protected _render(nativeProps: ScrollViewProps): JSX.Element;
     private _onKeyDown;

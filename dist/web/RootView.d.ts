@@ -42,7 +42,7 @@ export interface MainViewContext {
 export declare class MainViewContainer extends React.Component<Types.CommonProps<MainViewContainer>, Types.Stateless> implements React.ChildContextProvider<MainViewContext> {
     static childContextTypes: React.ValidationMap<any>;
     getChildContext(): MainViewContext;
-    render(): ((string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.ReactNode[]) & (boolean | React.ReactChild | React.ReactFragment | React.ReactPortal)) | null | undefined;
+    render(): React.ReactNode | React.ReactNode[];
 }
 export declare class RootView extends React.Component<RootViewProps, RootViewState> {
     static childContextTypes: React.ValidationMap<any>;

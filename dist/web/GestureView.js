@@ -252,11 +252,12 @@ var GestureView = /** @class */ (function (_super) {
     };
     GestureView.prototype._createMouseResponder = function (container) {
         var _this = this;
+        var context = this.context;
         this._disposeMouseResponder();
         this._responder = MouseResponder_1.default.create({
             id: this._id,
             target: container,
-            disableWhenModal: !!this.context.isInRxMainView,
+            disableWhenModal: !!context.isInRxMainView,
             shouldBecomeFirstResponder: function (event) {
                 if (!_this.props.onPan && !_this.props.onPanHorizontal && !_this.props.onPanVertical) {
                     return false;

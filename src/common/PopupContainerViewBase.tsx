@@ -281,6 +281,8 @@ function recalcInnerPosition(anchorRect: ClientRect, positionToUse: PopupPositio
 }
 
 export abstract class PopupContainerViewBase<P extends PopupContainerViewBaseProps<C>, S, C> extends React.Component<P, S> {
+    declare context: PopupContainerViewContext;
+
     static contextTypes: React.ValidationMap<any> = {
         focusManager: PropTypes.object,
     };

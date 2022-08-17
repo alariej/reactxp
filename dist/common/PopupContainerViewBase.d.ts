@@ -32,12 +32,13 @@ export interface RecalcResult {
 }
 export declare function recalcPositionFromLayoutData(windowDims: Dimensions, anchorRect: ClientRect, popupRect: Dimensions, positionPriorities?: PopupPosition[], useInnerPositioning?: boolean): RecalcResult | undefined;
 export declare abstract class PopupContainerViewBase<P extends PopupContainerViewBaseProps<C>, S, C> extends React.Component<P, S> {
+    context: PopupContainerViewContext;
     static contextTypes: React.ValidationMap<any>;
     static childContextTypes: React.ValidationMap<any>;
     private _popupComponentStack;
     constructor(props: P, context?: PopupContainerViewContext);
     getChildContext(): {
-        focusManager: any;
+        focusManager: FocusManagerBase | undefined;
         popupContainer: PopupContainerViewBase<P, S, C>;
     };
     registerPopupComponent(onShow: () => void, onHide: () => void): PopupComponent;

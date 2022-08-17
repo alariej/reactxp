@@ -25,13 +25,11 @@ declare const RootViewUsingStore: {
             focusManager: FocusManager;
         };
         renderTopView(content: JSX.Element): JSX.Element;
-        context: any;
+        context: unknown;
         setState<K extends never>(state: {} | ((prevState: Readonly<{}>, props: Readonly<{}>) => {} | Pick<{}, K> | null) | Pick<{}, K> | null, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
         render(): React.ReactNode;
-        readonly props: Readonly<{}> & Readonly<{
-            children?: React.ReactNode;
-        }>;
+        readonly props: Readonly<{}>;
         state: Readonly<{}>;
         refs: {
             [key: string]: React.ReactInstance;
@@ -66,13 +64,11 @@ declare const RootViewUsingProps: {
             focusManager: FocusManager;
         };
         renderTopView(content: JSX.Element): JSX.Element;
-        context: any;
+        context: unknown;
         setState<K extends never>(state: {} | ((prevState: Readonly<{}>, props: Readonly<{}>) => {} | Pick<{}, K> | null) | Pick<{}, K> | null, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
         render(): React.ReactNode;
-        readonly props: Readonly<{}> & Readonly<{
-            children?: React.ReactNode;
-        }>;
+        readonly props: Readonly<{}>;
         state: Readonly<{}>;
         refs: {
             [key: string]: React.ReactInstance;

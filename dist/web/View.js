@@ -43,7 +43,6 @@ var AutoFocusHelper_1 = require("../common/utils/AutoFocusHelper");
 var FocusManager_1 = require("../common/utils/FocusManager");
 var RX = require("../common/Interfaces");
 var AccessibilityUtil_1 = require("./AccessibilityUtil");
-var AnimateListEdits_1 = require("./listAnimations/AnimateListEdits");
 var FocusManager_2 = require("./utils/FocusManager");
 var restyleForInlineText_1 = require("./utils/restyleForInlineText");
 var Styles_1 = require("./Styles");
@@ -331,15 +330,9 @@ var View = /** @class */ (function (_super) {
             combinedStyles.pointerEvents = 'none';
         }
         var reactElement;
-        var childAnimationsEnabled = this.props.animateChildEnter || this.props.animateChildMove || this.props.animateChildLeave;
-        if (childAnimationsEnabled) {
-            reactElement = (React.createElement(AnimateListEdits_1.default, __assign({}, props, { "data-test-id": this.props.testId, animateChildEnter: this.props.animateChildEnter, animateChildMove: this.props.animateChildMove, animateChildLeave: this.props.animateChildLeave }), this.props.children));
-        }
-        else {
-            reactElement = (React.createElement("div", __assign({}, props, { "data-test-id": this.props.testId }),
-                this._renderResizeDetectorIfNeeded(combinedStyles),
-                this.props.children));
-        }
+        reactElement = (React.createElement("div", __assign({}, props, { "data-test-id": this.props.testId }),
+            this._renderResizeDetectorIfNeeded(combinedStyles),
+            this.props.children));
         return this.context.isRxParentAText ?
             (0, restyleForInlineText_1.default)(reactElement) :
             reactElement;
