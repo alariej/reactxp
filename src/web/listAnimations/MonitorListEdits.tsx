@@ -139,8 +139,8 @@ export interface MonitorListEditsProps extends React.HTMLAttributes<any> {
     // Call `done` when the animations are finished. Until `done` is called, the component
     // will refuse to rerender.
     componentWillAnimate?: (edits: Edits, done: () => void) => void;
-
     testId?: string;
+    children: React.ReactNode;
 }
 
 export class MonitorListEdits extends React.Component<MonitorListEditsProps, Types.Stateless> {

@@ -23,6 +23,7 @@ import PopupContainerView from './PopupContainerView';
 import restyleForInlineText from './utils/restyleForInlineText';
 import Styles from './Styles';
 import ViewBase from './ViewBase';
+import AnimateListEdits from './listAnimations/AnimateListEdits';
 
 // Cast to any to allow merging of web and RX styles
 const _styles = {
@@ -391,13 +392,27 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RX.Vi
         }
 
         let reactElement: React.ReactElement<any>;
-        reactElement = (
-            <div { ...props } data-test-id={ this.props.testId }>
-                { this._renderResizeDetectorIfNeeded(combinedStyles) }
-                { this.props.children }
-            </div>
-        );
-
+        const childAnimationsEnabled = this.props.animateChildEnter || this.props.animateChildMove || this.props.animateChildLeave;
+        if (childAnimationsEnabled) {
+            reactElement = (
+                <AnimateListEdits
+                    { ...props }
+                    data-test-id={ this.props.testId }
+                    animateChildEnter={ this.props.animateChildEnter }
+                    animateChildMove={ this.props.animateChildMove }
+                    animateChildLeave={ this.props.animateChildLeave }
+                >
+                    { this.props.children }
+                </AnimateListEdits>
+            );
+        } else {
+            reactElement = (
+                <div { ...props } data-test-id={ this.props.testId }>
+                    { this._renderResizeDetectorIfNeeded(combinedStyles) }
+                    { this.props.children }
+                </div>
+            );
+        }
         return this.context.isRxParentAText ?
             restyleForInlineText(reactElement) :
             reactElement;
