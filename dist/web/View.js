@@ -47,6 +47,7 @@ var FocusManager_2 = require("./utils/FocusManager");
 var restyleForInlineText_1 = require("./utils/restyleForInlineText");
 var Styles_1 = require("./Styles");
 var ViewBase_1 = require("./ViewBase");
+var AnimateListEdits_1 = require("./listAnimations/AnimateListEdits");
 // Cast to any to allow merging of web and RX styles
 var _styles = {
     defaultStyle: {
@@ -330,9 +331,15 @@ var View = /** @class */ (function (_super) {
             combinedStyles.pointerEvents = 'none';
         }
         var reactElement;
-        reactElement = (React.createElement("div", __assign({}, props, { "data-test-id": this.props.testId }),
-            this._renderResizeDetectorIfNeeded(combinedStyles),
-            this.props.children));
+        var childAnimationsEnabled = this.props.animateChildEnter || this.props.animateChildMove || this.props.animateChildLeave;
+        if (childAnimationsEnabled) {
+            reactElement = (React.createElement(AnimateListEdits_1.default, __assign({}, props, { "data-test-id": this.props.testId, animateChildEnter: this.props.animateChildEnter, animateChildMove: this.props.animateChildMove, animateChildLeave: this.props.animateChildLeave }), this.props.children));
+        }
+        else {
+            reactElement = (React.createElement("div", __assign({}, props, { "data-test-id": this.props.testId }),
+                this._renderResizeDetectorIfNeeded(combinedStyles),
+                this.props.children));
+        }
         return this.context.isRxParentAText ?
             (0, restyleForInlineText_1.default)(reactElement) :
             reactElement;

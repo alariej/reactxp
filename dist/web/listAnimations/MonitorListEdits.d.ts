@@ -31,6 +31,7 @@ export interface Edits {
 export interface MonitorListEditsProps extends React.HTMLAttributes<any> {
     componentWillAnimate?: (edits: Edits, done: () => void) => void;
     testId?: string;
+    children: React.ReactNode;
 }
 export declare class MonitorListEdits extends React.Component<MonitorListEditsProps, Types.Stateless> {
     private _itemRefs;

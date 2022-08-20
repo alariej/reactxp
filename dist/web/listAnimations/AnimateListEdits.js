@@ -131,7 +131,7 @@ var AnimateListEdits = /** @class */ (function (_super) {
         delete props.animateChildEnter;
         delete props.animateChildLeave;
         delete props.animateChildMove;
-        return (React.createElement(MonitorListEdits_1.MonitorListEdits, __assign({ componentWillAnimate: function (edits, done) { return _this._handleWillAnimate(edits, done); } }, props)));
+        return (React.createElement(MonitorListEdits_1.MonitorListEdits, __assign({ componentWillAnimate: function (edits, done) { return _this._handleWillAnimate(edits, done); } }, props), this.props.children));
     };
     return AnimateListEdits;
 }(React.Component));
