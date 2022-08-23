@@ -58,6 +58,7 @@ var ScrollView = /** @class */ (function (_super) {
         };
         return _this;
     }
+    // protected _render(nativeProps: RN.ScrollViewProps & React.Props<RN.ScrollView>): JSX.Element {
     ScrollView.prototype._render = function (nativeProps) {
         if (this.props.scrollXAnimatedValue || this.props.scrollYAnimatedValue) {
             // Have to jump over to an Animated ScrollView to use an RN.Animated.event...
@@ -130,7 +131,9 @@ var ScrollView = /** @class */ (function (_super) {
         // set to true.
         // We also set removeClippedSubviews to false, overriding the default value. Most of the scroll views
         // we use are virtualized anyway.
+        // const internalProps: RN.ScrollViewProps & React.Props<RN.ScrollView> = {
         var internalProps = {
+            ref: this._setNativeComponent,
             // Bug in react-native.d.ts.  style should be "style?: StyleProp<ScrollViewStyle>;" but instead is ViewStyle.
             style: this.props.style,
             onScroll: scrollHandler,
