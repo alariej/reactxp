@@ -34,7 +34,7 @@ export const CommonAnimatedClasses: AnimatedClasses = {
 
 let animatedClasses: AnimatedClasses = CommonAnimatedClasses;
 
-class AnimatedWrapper<P, T, C> extends RX.AnimatedComponent<P, T, C> {
+class AnimatedWrapper<P extends RX.Types.CommonProps<C>, T, C> extends RX.AnimatedComponent<P, T, C> {
     protected _mountedComponent: RN.ReactNativeBaseComponent<any, any> | undefined;
 
     setNativeProps(props: P) {

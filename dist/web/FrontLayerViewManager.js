@@ -10,7 +10,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrontLayerViewManager = void 0;
 var React = require("react");
-var ReactDOM = require("react-dom");
+var client_1 = require("react-dom/client");
 var Timers_1 = require("../common/utils/Timers");
 var MouseResponder_1 = require("./utils/MouseResponder");
 var RootView_1 = require("./RootView");
@@ -159,7 +159,8 @@ var FrontLayerViewManager = /** @class */ (function () {
         this._updateModalDisplayedState();
         var rootView = (React.createElement(RootView_1.RootView, { mainView: this._mainView, keyBoardFocusOutline: this._mainView.props.keyBoardFocusOutline, mouseFocusOutline: this._mainView.props.mouseFocusOutline, modal: topModal, activePopup: activePopup, cachedPopup: this._cachedPopups, autoDismiss: this._activePopupAutoDismiss, autoDismissDelay: this._activePopupAutoDismissDelay, onDismissPopup: function () { return _this.dismissPopup(_this._activePopupId); }, writingDirection: this._isRtlForced ? 'rtl' : (this._isRtlAllowed ? 'auto' : 'ltr') }));
         var container = document.getElementsByClassName('app-container')[0];
-        ReactDOM.render(rootView, container);
+        var root = (0, client_1.createRoot)(container);
+        root.render(rootView);
     };
     FrontLayerViewManager.prototype.isPopupDisplayed = function (popupId) {
         if (popupId) {
