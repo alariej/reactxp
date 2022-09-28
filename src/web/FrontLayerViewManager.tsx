@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, Root } from 'react-dom/client';
 
 import { Types } from '../common/Interfaces';
 import Timers from '../common/utils/Timers';
@@ -36,6 +36,7 @@ export class FrontLayerViewManager {
         typeof document.documentElement !== 'undefined' && document.documentElement.dir === 'rtl';
     private _isRtlAllowed = true;
     private _isRtlForced = false;
+    private _root: Root | undefined;
 
     setMainView(element: React.ReactElement<any>): void {
         this._mainView = element;
@@ -205,8 +206,8 @@ export class FrontLayerViewManager {
 
         const container = document.getElementsByClassName('app-container')[0];
 
-        const root = createRoot(container);
-        root.render(rootView)
+        if (!this._root) { this._root = createRoot(container) }
+        this._root.render(rootView)
     }
 
     isPopupDisplayed(popupId?: string): boolean {

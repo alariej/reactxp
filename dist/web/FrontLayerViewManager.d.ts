@@ -21,6 +21,7 @@ export declare class FrontLayerViewManager {
     private _isRtlDefault;
     private _isRtlAllowed;
     private _isRtlForced;
+    private _root;
     setMainView(element: React.ReactElement<any>): void;
     isModalDisplayed(modalId?: string): boolean;
     showModal(modal: React.ReactElement<Types.ViewProps>, modalId: string, options?: Types.ModalOptions): void;

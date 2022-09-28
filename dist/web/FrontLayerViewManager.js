@@ -159,8 +159,10 @@ var FrontLayerViewManager = /** @class */ (function () {
         this._updateModalDisplayedState();
         var rootView = (React.createElement(RootView_1.RootView, { mainView: this._mainView, keyBoardFocusOutline: this._mainView.props.keyBoardFocusOutline, mouseFocusOutline: this._mainView.props.mouseFocusOutline, modal: topModal, activePopup: activePopup, cachedPopup: this._cachedPopups, autoDismiss: this._activePopupAutoDismiss, autoDismissDelay: this._activePopupAutoDismissDelay, onDismissPopup: function () { return _this.dismissPopup(_this._activePopupId); }, writingDirection: this._isRtlForced ? 'rtl' : (this._isRtlAllowed ? 'auto' : 'ltr') }));
         var container = document.getElementsByClassName('app-container')[0];
-        var root = (0, client_1.createRoot)(container);
-        root.render(rootView);
+        if (!this._root) {
+            this._root = (0, client_1.createRoot)(container);
+        }
+        this._root.render(rootView);
     };
     FrontLayerViewManager.prototype.isPopupDisplayed = function (popupId) {
         if (popupId) {
